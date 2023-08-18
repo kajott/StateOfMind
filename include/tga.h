@@ -26,6 +26,7 @@ typedef struct
     PIXEL Rsrvd;		/* 1 bit, reserved */
     PIXEL OrgBit;		/* 1 bit, origin: 0=lower left, 1=upper left */
     PIXEL IntrLve;		/* 2 bits, interleaving flag */
+#pragma pack()
 } TGA_HEAD;
 
 // Definitions for image types.

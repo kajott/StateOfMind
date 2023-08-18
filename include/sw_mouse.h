@@ -14,6 +14,7 @@ typedef struct {
    MEM_ZONE *Zone;   
    INT X, Y, Last_X, Last_Y;
 
+#pragma pack()
 } SW_INTERFACE;
 
 /********************************************************************/

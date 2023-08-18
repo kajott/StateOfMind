@@ -15,6 +15,7 @@ struct POLY_RAYTRACE_CST {
    FLT U2, V2, UV;
    FLT xo, yo;
    VECTOR PoP1, PoP2;
+#pragma pack()
 } ;
 
 #define SET_FCOLOR(C,R,G,B,A)   { (C)[0]=(R); (C)[1]=(G); \
@@ -53,6 +54,7 @@ typedef struct {
    FLT Light_Fall;
    UINT Filter_Flags;
    UINT Backface_Cull;
+#pragma pack()
 } RAYTRACER_INFO;
 
 extern RAYTRACER_INFO Ray_Info;
@@ -82,6 +84,7 @@ struct RAY {
    VECTOR Normal;
    OBJ_NODE *Node;
    FLT    x, y;      // for mapping
+#pragma pack()
 };
 
 #define _RAY_HUGE_    (1.0e10f)
@@ -128,6 +131,7 @@ struct SLAB {
 
    VECTOR N;
    FLT d;
+#pragma pack()
 };
 
 struct SLABS {
@@ -135,6 +139,7 @@ struct SLABS {
 
    INT Nb;
    SLAB *Slabs;
+#pragma pack()
 };
 
 #define _SLAB_EPSILON_ (1.0e-6f)
@@ -177,6 +182,7 @@ struct RAY_MATERIAL {
 
    FLT R, T, IOR;
    FCOLOR Ambient, Diffuse, Specular;
+#pragma pack()
 };
 
 
@@ -209,6 +215,7 @@ struct OCTREE_DUMMY_DATA {
 #pragma pack(1)
 
    OCTREE_DUMMY_DATA *Next;
+#pragma pack()
 };
 
 /******************************************************************/
@@ -218,6 +225,7 @@ struct OCTREE_ID {
 
    INT x,y,z;
    INT Size;
+#pragma pack()
 };
 
 struct OCTREE_NODE {
@@ -226,6 +234,7 @@ struct OCTREE_NODE {
    OCTREE_ID Id;
    OCTREE_DUMMY_DATA *Data;
    OCTREE_NODE *Children[8];
+#pragma pack()
 };
 
 /******************************************************************/
@@ -243,6 +252,7 @@ struct  OCTREE {
    INT Data_Size;          // sizeof( OCTREE_DATA )
    void *(*Init_Data_Block)( );
    void (*Destroy_Data_Block)(void *);
+#pragma pack()
 };
 
 /******************************************************************/
@@ -282,6 +292,7 @@ struct OCTREE_DATA {
    FLT drdx, dgdx, dbdx,  drdy, dgdy, dbdy,  drdz, dgdz, dbdz;
    FLT  Harmonic_Mean_Distance, Nearest_Distance;
    VECTOR To_Nearest_Surface;
+#pragma pack()
 };
 
 typedef struct {
@@ -296,6 +307,7 @@ typedef struct {
    FLT Gray_Level, Brightness;
    INT Max_Radiosity_Level, Cur_Radiosity_Level;
    BYTE Show_Rad_Smp;
+#pragma pack()
 } RAD_INFO;
 
       // specific calls for radiosity...
@@ -323,6 +335,7 @@ typedef struct {
    USHORT Z;
    SHORT Nx, Ny, Nz;
    USHORT Node_Id, P_Id;
+#pragma pack()
 } RAY_CELL;
 
 extern SHADER_METHODS Ray_Shader;

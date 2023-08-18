@@ -30,6 +30,7 @@ struct TEXTURE_MAP {
    USHORT Offset;
    PIXEL *Ptr;       /* 64k aligned ? */
 
+#pragma pack()
 };
 
 struct MATERIAL {
@@ -44,6 +45,7 @@ struct MATERIAL {
    INT Mapped;
    FCOLOR Ambient, Diffuse, Specular;
 
+#pragma pack()
 };
 
 struct TXT_CACHE {
@@ -57,6 +59,7 @@ struct TXT_CACHE {
    PIXEL *CMap;
    INT Nb_Col, Nb_Offset;
 
+#pragma pack()
 };
 
 #define TEXTURE_MAP_SIZE     (256*256)
@@ -86,6 +89,7 @@ struct CACHE_METHODS {
    void   (*Init_From_Poly_III)( );
    USHORT (*Poly_Flat_Color)( );
 
+#pragma pack()
 };
 
 extern CACHE_METHODS Cache_Methods_I;
@@ -153,6 +157,7 @@ struct MIP_ROW {
    INT Nb_Entries;
    INT Max_Entries;
 
+#pragma pack()
 };
 
 struct MIP_BLOCK { 
@@ -167,6 +172,7 @@ struct MIP_BLOCK {
    MIP_ROW *Mip_Row;
    INT Row_Entry;
 
+#pragma pack()
 };
 
 typedef struct {
@@ -175,6 +181,7 @@ typedef struct {
    MIP_BLOCK *Mips[MIP_MAX];
    INT Max_Mip;
 
+#pragma pack()
 } POLY_MIPS;
 
 typedef struct {
@@ -190,6 +197,7 @@ typedef struct {
    MIP_ROW *Mip_Rows[MIP_MAX];
    INT Nb_Rows, Size;
 
+#pragma pack()
 } TXT_CACHE_III;
 
 

@@ -20,6 +20,7 @@ struct EDGE2D {
    EDGE2D  *Next, *Prev;
    EDGE2D  *Remove;
 
+#pragma pack()
 };
 
 
@@ -30,6 +31,7 @@ struct SPAN {
     INT      Dst;
     SURFACE *Surf;
 
+#pragma pack()
 };
 
 #define MAX_EDGES_2D   5000

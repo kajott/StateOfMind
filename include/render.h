@@ -109,6 +109,7 @@ struct RENDERER
    CACHE_METHODS     *Cache_Methods;
 
    INT Size_X, Size_Y, BpS;
+#pragma pack()
 };
 
 

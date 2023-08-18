@@ -80,6 +80,7 @@ typedef struct {
    VECTOR Pos;
    VECTOR Pivot;
 
+#pragma pack()
 } TRANSFORM;
 
 /******************************************************************/

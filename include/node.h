@@ -26,6 +26,7 @@ struct NODE_METHODS {
    void    (*Get_Materials)( RAY *Ray, OBJ_NODE *Node );
    INT     (*Init_Ray_Constants)( OBJ_NODE *Node );
 
+#pragma pack()
 };
 
       // Shortcuts
@@ -63,6 +64,7 @@ struct OBJ_NODE {
    FLT  Cur_Time;
    OBJECT *Data;
    STRING Name;
+#pragma pack()
 };
 
 #define STORE_TRANSFORM_MATRIX(Node)      \

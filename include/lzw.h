@@ -42,6 +42,7 @@ struct LZW_STREAM
    BYTE   *Suffix;
    USHORT *Prefix;
 
+#pragma pack()
 };
 
 

@@ -40,6 +40,7 @@ typedef struct {
    INT Pos, Row;           // music position. Useless for MP3
    INT Precompute_Flag;    // useless 
 
+#pragma pack()
 } PHASE;
 
 extern long Timer;

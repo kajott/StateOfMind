@@ -36,6 +36,7 @@ typedef struct {
    USHORT Alpha;
    USHORT RLE_Type;  // 0=full  1=BLOCK/FILL   2=SKIP/BLOCK/FILL
 
+#pragma pack()
 } DMASK;
 
 extern DMASK *New_DMask( INT W, INT H, INT Nb_Col );

@@ -24,6 +24,7 @@ struct VISTA_CHUNK
    VISTA_CHUNK *Next;
    USHORT *Obj_ID;
    USHORT *Poly_ID;
+#pragma pack()
 };
 
 typedef struct 
@@ -38,6 +39,7 @@ typedef struct
    USHORT *Obj_ID;
    OBJ_NODE *Camera;
    FLT Lens, Clip;
+#pragma pack()
 } VISTA;
 
 
@@ -79,6 +81,7 @@ typedef struct
    INT Type;   // DELTA or INIT
    FLT Z_Min, Z_Max;
    INT Nb_Polys;
+#pragma pack()
 }  VISTA_CHUNK_IO;
 
 typedef struct 
@@ -89,6 +92,7 @@ typedef struct
    USHORT Dummy;
    FLT Lens, Clip;
    INT Nb_Chunks;
+#pragma pack()
 } VISTA_IO;
 
 /*********************************************************************/

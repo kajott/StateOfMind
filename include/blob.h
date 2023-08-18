@@ -36,6 +36,7 @@ struct BLOB
    VECTOR Bi[MAX_CENTERS];
 #endif
 
+#pragma pack()
 };
 
 /******************************************************************/

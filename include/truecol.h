@@ -29,6 +29,7 @@ typedef struct
    INT Nb_Col;
    UINT *Pal;
 
+#pragma pack()
 } BITMAP_16;
 
 extern BITMAP_16 *Load_16b( char *Name );

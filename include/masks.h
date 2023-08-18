@@ -30,6 +30,7 @@ typedef union {
   COLOR_CMAP *Matcher;
   _CM_DUMMY_ *Dummy;
 
+#pragma pack()
 } SKL_CMAPPER;
 
 struct _CM_DUMMY_ { // Common fields... Beware of casts and union access...
@@ -39,6 +40,7 @@ struct _CM_DUMMY_ { // Common fields... Beware of casts and union access...
    void (*Col_Convert)( SKL_CMAPPER *, PIXEL *, PIXEL *, INT );
    UINT Stamp;
 
+#pragma pack()
 };
 
 struct RGB_MASK {
@@ -52,6 +54,7 @@ struct RGB_MASK {
    FORMAT In, Out;
    UINT Users;
 
+#pragma pack()
 };
 
 struct COLOR_INDEXER {
@@ -64,6 +67,7 @@ struct COLOR_INDEXER {
    COLOR_ENTRY Fmt_Cols[ 256 ];
    FORMAT Out;
 
+#pragma pack()
 };
 
 struct COLOR_DITHERER {
@@ -76,6 +80,7 @@ struct COLOR_DITHERER {
    COLOR_ENTRY Cols[ 256 ];
    UINT *Dst_Stamp;
 
+#pragma pack()
 };
 
 struct COLOR_CMAP {
@@ -87,6 +92,7 @@ struct COLOR_CMAP {
    COLOR_ENTRY Cols[ 256 ];
    UINT *Dst_Stamp;
 
+#pragma pack()
 };
 
 /********************************************************/

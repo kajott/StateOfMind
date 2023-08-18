@@ -85,6 +85,7 @@ struct OBJECT {     // Abstract struct
 
    OBJECT_FIELDS
 
+#pragma pack()
 };
 
 /******************************************************************/

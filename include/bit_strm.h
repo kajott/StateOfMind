@@ -29,6 +29,7 @@ typedef struct {
    INT    (*Decode_II)( );
    INT    (*Close)( BIT_STRM * );
 
+#pragma pack()
 } BSTRM_MTHDS;
 
 struct BIT_STRM {
@@ -46,6 +47,7 @@ struct BIT_STRM {
    INT   File_Len;
    BSTRM_MTHDS Mthds;
 
+#pragma pack()
 };
 
 /*******************************************************/

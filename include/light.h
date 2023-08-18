@@ -23,6 +23,7 @@ typedef struct
    INT dU, dV;
    FLT Scale;
    FLT Alpha;
+#pragma pack()
 } FLARE_SPRITE;
 
 typedef struct {
@@ -32,6 +33,7 @@ typedef struct {
    INT Width, Height, BpS;
    INT Nb_Sprites;
    FLARE_SPRITE *Sprites;
+#pragma pack()
 } FLARE;
 
 #if 0
@@ -112,6 +114,7 @@ struct LIGHT {
    SPLINE_3DS *Hide_k;
 
    void *Light_Map;
+#pragma pack()
 };
 
 extern NODE_METHODS _LIGHT_, _LIGHT_WITH_RENDER_;

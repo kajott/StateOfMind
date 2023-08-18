@@ -15,6 +15,7 @@ typedef struct {
    F_MAPPING UV;       // 20
    VECTOR N;           // 32    // Store transformed normal, or else...
 
+#pragma pack()
 } P_VERTICE;
 
 typedef struct {
@@ -28,6 +29,7 @@ typedef struct {
 //   USHORT C;         // 22
 //   USHORT UV[3];     // 28    // should be MAX_POLY_PTS !!
 
+#pragma pack()
 } P_POLY;
 
 typedef struct {
@@ -49,6 +51,7 @@ typedef struct {
 
    void (*Emit_Poly)( );  // replace Render.Emit_Poly() if not NULL.
 
+#pragma pack()
 } SHADER_METHODS;
 
 

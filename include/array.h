@@ -16,6 +16,7 @@ typedef struct {
    INT Nb_Elm, Max_Elm, Elm_Size;
    void *Data;
 
+#pragma pack()
 } DATA_ARRAY;
 
 extern void *Remove_Array_Elm( DATA_ARRAY *Array, void *Elm );

@@ -20,6 +20,7 @@ typedef struct {
    SHORT Col_Fix8[256*3*2];
    void *Drv;
 
+#pragma pack()
 } COLOR_FADER;
 
 extern COLOR_FADER *Drv_Setup_Fader(

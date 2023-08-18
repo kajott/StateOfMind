@@ -43,6 +43,7 @@ struct BSP_NODE
    VECTOR Mins,  Maxs;
    PLANE Plane;     // 12
 
+#pragma pack()
 };
 
 struct BSP_LEAF
@@ -53,6 +54,7 @@ struct BSP_LEAF
    UINT Obj_ID;
    UINT Poly1, Poly2; 
 
+#pragma pack()
 };
 
 /******************************************************************/
@@ -66,6 +68,7 @@ struct BSP_TREE
    BSP_LEAF *Leaves;
    UINT Free_Leaves, Max_Leaves;
 
+#pragma pack()
 };
 
 /******************************************************************/

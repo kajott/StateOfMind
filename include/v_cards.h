@@ -20,6 +20,7 @@ struct CARD_METHODS {
    MEM_ZONE_DRIVER *(*Init_VGA)( MEM_ZONE_DRIVER * );
    MEM_ZONE_DRIVER *(*Init_LFB)( MEM_ZONE_DRIVER * );
    MEM_ZONE_DRIVER *(*Init_BNK_SW)( MEM_ZONE_DRIVER * );
+#pragma pack()
 };
 
 /********************************************************/

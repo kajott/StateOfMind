@@ -30,6 +30,7 @@ typedef struct {
    USHORT *Frame;
    INT Nb_Col;
    PIXEL CMap[768]; 
+#pragma pack()
 } WLT_STREAM;
 
    // in wlt_strm.c

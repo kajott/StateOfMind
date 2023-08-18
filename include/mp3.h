@@ -24,6 +24,7 @@ typedef struct {
    INT Bit_Rate, FS, Mean_Freq_Size;
    INT Cur_Frame;
 
+#pragma pack()
 } MP3_STRM;          // <= must _always_ be used as pointer.
                      // don't allocate it yourself!
                      // use MP3_Open_File() instead.
@@ -69,6 +70,7 @@ typedef struct {
    SHORT Nb_Frames;
    SHORT Slot;
 
+#pragma pack()
 } MP3_SAMPLE;
 
 #define MP3_MAX_SAMPLES  16       // max samples

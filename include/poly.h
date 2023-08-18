@@ -17,6 +17,7 @@ typedef struct
 
     PT_2D  *Index[MAX_VERT_2D+1];
     PT_2D   Pts[MAX_VERT_2D];
+#pragma pack()
 } POLY_2D;
 
 typedef FLT VTX_3D[8];        // x,y,z  + u,v + u2,v2 + gouraud
@@ -28,6 +29,7 @@ typedef struct
     USHORT    Nb_Vtx;
     USHORT    Nb_Fields;
     VTX_3D    Vtx[MAX_VERT_3D];
+#pragma pack()
 } POLY_3D;
 
 typedef struct SURFACE SURFACE;
@@ -48,6 +50,7 @@ struct SURFACE {
    void     *Texture;
    FLT       Scale;
    INT       Mip;
+#pragma pack()
 };
 
 extern void Project_Poly_2D( POLY_2D *Poly2D, POLY_3D *Poly3D, 

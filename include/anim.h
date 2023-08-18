@@ -19,6 +19,7 @@ typedef struct {
    FLT Values[4];          // Max size: 4*sizeof(FLT) 
    FLT Left[4], Right[4];  /* Position & left/right tangents */
 
+#pragma pack()
 } A_KEY;
 
 typedef struct {
@@ -28,6 +29,7 @@ typedef struct {
    INT Nb_Keys, Data_Size, Cache;
    A_KEY *Keys;
 
+#pragma pack()
 } SPLINE_3DS;
 
 #define TRACK_NO_FLAG 0x0000

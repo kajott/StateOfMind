@@ -26,6 +26,7 @@ typedef struct {
    FLT    Distance[MAX_NEAREST_COUNT];
    INT    Close_Count;
 
+#pragma pack()
 } RAD_WGHT;
 
 static RAD_INFO Rad_Info;

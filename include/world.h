@@ -15,6 +15,7 @@ typedef struct {
    INT Nb_Polys, Nb_Vertex, Nb_Edges;
 // INT Nb_Mat, Nb_Txt;
 
+#pragma pack()
 } WORLD_RSC;
 
 typedef struct {         // keeps count of allocated resources
@@ -25,6 +26,7 @@ typedef struct {         // keeps count of allocated resources
    INT Vertex_Sz, Poly_To_Sort_Sz;
    INT P_Vertex_Sz, Vertex_State_Sz;
 
+#pragma pack()
 } WORLD_REAL_RSC;
 
    // in wrld_rsc.c
@@ -68,6 +70,7 @@ struct WORLD {
    void *Octree;
    void *Bsp;
 
+#pragma pack()
 };
 
 /******************************************************************/

@@ -26,6 +26,7 @@ typedef struct {
    void (*Flush_Force)( BYTE *, INT );
    USHORT Flags;
 
+#pragma pack()
 } AUDIO_DRIVER;
 
 /******************************************************************/

@@ -64,6 +64,7 @@ typedef struct {
 
    INT X, Y, Width, Height;
 
+#pragma pack()
 } BACKUP_HEADER;
 
 struct MEM_ZONE_METHODS
@@ -76,6 +77,7 @@ struct MEM_ZONE_METHODS
    PIXEL *(*Get_Scanline)( MEM_ZONE *, INT );
    ZONE_CLIP_TYPE (*Set_Position)( MEM_ZONE *, INT, INT, INT );
 
+#pragma pack()
 };
 
 struct MEM_IMG
@@ -90,6 +92,7 @@ struct MEM_IMG
    FORMAT Format;
    PIXEL *Base_Ptr;
 
+#pragma pack()
 };
 
 #define MEM_ZONE_FIELDS          \
@@ -108,6 +111,7 @@ struct MEM_ZONE
 
    MEM_ZONE_FIELDS
 
+#pragma pack()
 };
 
 /********************************************************/

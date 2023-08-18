@@ -78,6 +78,7 @@ typedef struct {
    STRING Display_Name;
    UINT Direct, Force_Convert;
 
+#pragma pack()
 } DRIVER_ARG;
 
 /********************************************************/
@@ -123,6 +124,7 @@ struct DRV_EVENT {
    MODIFIER_TYPE  Modifier;
    INT   x, y;
 
+#pragma pack()
 };
 
 /********************************************************/
@@ -149,6 +151,7 @@ struct MEM_ZONE_DRIVER {
 
    MEM_ZONE_DRIVER_FIELDS
 
+#pragma pack()
 };
 
 /********************************************************/
@@ -164,6 +167,7 @@ struct _G_DRIVER_ {
    MEM_ZONE *(*Open)( MEM_ZONE_DRIVER *, INT );
    INT (*Change_Colors)( MEM_ZONE_DRIVER *, INT, COLOR_ENTRY *CMap );
 
+#pragma pack()
 };
 
 /********************************************************/ 

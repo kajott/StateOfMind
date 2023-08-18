@@ -27,6 +27,7 @@ typedef struct
    void *CMap;
    INT Xo, Yo;
 
+#pragma pack()
 } VBUFFER;
 
 /********************************************************************/

@@ -19,6 +19,7 @@ struct PARTICLE {
 
    SHADER_METHODS *Shader;
    SPLINE_3DS *Pos_k, *Rot_k, *Scale_k, *Morph_k, *Hide_k;
+#pragma pack()
 };
 
 extern INT New_Particles( OBJ_NODE *Node, INT Nb );

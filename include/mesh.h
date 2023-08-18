@@ -66,6 +66,7 @@ struct POLY {
    FLT    N_Dot_C;   // 44
    I_MAPPING UV[4];  // 48
                      // 64
+#pragma pack()
 };
 
 struct MSH_EDGE {
@@ -76,6 +77,7 @@ struct MSH_EDGE {
    USHORT Poly1, Poly2;    // 12
    SHORT Sharpness;        // 14
    PIXEL State, Type;      // 16
+#pragma pack()
 };
 
 struct MESH {
@@ -107,6 +109,7 @@ struct MESH {
    VECTOR *dVw;
    VECTOR *dw;
    FLT    *Area;
+#pragma pack()
 };
 
 #define MESH_DO_MORPH             0x0001

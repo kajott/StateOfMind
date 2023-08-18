@@ -15,6 +15,7 @@ struct GROUP {
 
    SPLINE_3DS *Pos_k, *Rot_k, *Scale_k, *Hide_k;
 
+#pragma pack()
 };
 
 struct OBJ_DUMMY {
@@ -25,6 +26,7 @@ struct OBJ_DUMMY {
    SPLINE_3DS *Pos_k, *Rot_k, *Scale_k, *FOV_k;
    SPLINE_3DS *Roll_k, *Morph_k, *Hide_k;
 
+#pragma pack()
 };
 
 extern NODE_METHODS _GROUP_;

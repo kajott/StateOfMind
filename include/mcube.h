@@ -67,6 +67,7 @@ struct MC_BLOB
    FLT     Blend0, Blend1;
    FLT     Tension;
 
+#pragma pack()
 };
 
 /******************************************************************/

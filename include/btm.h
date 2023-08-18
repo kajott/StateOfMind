@@ -21,6 +21,7 @@ struct BITMAP
    PIXEL *Pal;
    int Nb_Col;
 
+#pragma pack()
 };
 
    // Abstract type for BITMAP I/O...
@@ -30,6 +31,7 @@ typedef struct {
 
    INT Width, Height, Nb_Col;
 
+#pragma pack()
 } BITMAP_IO;
 
 /*******************************************************************/

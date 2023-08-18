@@ -46,6 +46,7 @@ typedef struct {
    BYTE Original;
    BYTE Emphasis;
 
+#pragma pack()
 } MP3_HEADER;
 
 typedef struct
@@ -71,6 +72,7 @@ typedef struct
 
    USHORT Block[2][2];     // 0:long, 1:short, 2:mixed      (3:weird?)
 
+#pragma pack()
 }  MP3_INFO;
                                                 
 
@@ -93,6 +95,7 @@ typedef struct {
    BYTE MP3_Buffer[MP3_BUF_SIZE];
    BYTE *MP3_Buf;
 
+#pragma pack()
 } MP3_STRM;
 
 /******************************************************************/
@@ -170,6 +173,7 @@ typedef struct {
    SHORT Nb_Frames;
    SHORT Slot;
 
+#pragma pack()
 } MP3_SAMPLE;
 
 #define MP3_MAX_SAMPLES  16       // max samples
