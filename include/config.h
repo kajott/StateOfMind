@@ -12,7 +12,7 @@
 ////////////////////// General //////////////////////////////////////////////
 
 #ifndef DO_INDY_SWAP
-#define DO_INDY_SWAP      // for SGI & SUN
+//#define DO_INDY_SWAP      // for SGI & SUN
 #endif
 
 #ifndef NO_SOUND
