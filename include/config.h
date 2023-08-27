@@ -33,7 +33,11 @@
 
 
 // #define DEBUG(x)   x
+#ifdef NDEBUG
 #define DEBUG(x)      
+#else
+#define DEBUG(x)      (x)
+#endif
 
 #define FUNC(x)      (x)
 // #define FUNC(x)
