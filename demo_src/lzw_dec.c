@@ -77,9 +77,9 @@ EXTERN INT LZW_Decoder( BYTE *Out_Bits, FILE *In, INT Total_Size, INT Size )
    Top_Slot = 1 << LZW_Curr_Size;
    Slot = Clear_Code + 2;
 
+   SHORT OCode=0, FCode=0;
    while( ( Code=Get_Next_Code( In ) ) != Clear_Code+1 )
    {
-      SHORT OCode, FCode;
       if ( Code<0 ) return( TRUE );
       if ( Code == Clear_Code )
       {
