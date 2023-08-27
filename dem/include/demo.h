@@ -21,7 +21,7 @@
 #include "sprite.h"
 
 // #define PREVIEW
-#if !defined(WIN32)
+#if defined(USE_SDL) || !defined(WIN32)
 #define DUMP_OK
 #endif
 // #define DEBUG_OK

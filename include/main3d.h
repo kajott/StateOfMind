@@ -7,6 +7,8 @@
 #ifndef _MAIN_3D_H_
 #define _MAIN_3D_H_
 
+#include <string.h>
+
 #include "main.h"
 #include "btm.h"
 #include "truecol.h"

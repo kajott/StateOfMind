@@ -30,7 +30,7 @@ extern INT Get_Me_A_Number( FILE *In );
 
 /******************************************************************/
 
-#if defined( LNX ) || defined( UNIX )
+#if !defined(USE_SDL) && (defined( LNX ) || defined( UNIX ))
 #ifndef READ_SWITCH
 #define READ_SWITCH        "r"
 #endif   // READ_SWITCH
@@ -39,7 +39,7 @@ extern INT Get_Me_A_Number( FILE *In );
 #endif   // WRITE_SWITCH
 #endif
 
-#if defined(__DJGPP__) || defined(__WATCOMC__) || defined( WIN32 )
+#if defined(USE_SDL) || defined(__DJGPP__) || defined(__WATCOMC__) || defined( WIN32 )
 #ifndef READ_SWITCH
 #define READ_SWITCH        "rb"
 #endif

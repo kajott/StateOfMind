@@ -13,7 +13,7 @@ EXTERN FILE *_Std_Err_ = stderr;
 
 #endif
 
-#ifdef WIN32
+#if !defined(USE_SDL) && defined(WIN32)
 #include <windows.h>
 #include <windowsx.h>
 #endif
@@ -22,7 +22,7 @@ EXTERN FILE *_Std_Err_ = stderr;
 
 EXTERN void Exit_Upon_Mem_Error( const char *Str, INT Size )
 {
-#ifndef WIN32
+#if defined(USE_SDL) || !defined(WIN32)
 #ifndef SKL_LIGHT_CODE
    if ( Str == NULL ) fprintf( _Std_Err_, "Malloc Failure !\n" );
    else if ( Size ) fprintf( _Std_Err_, "Can't malloc %d bytes for '%s'.\n",
@@ -69,7 +69,7 @@ EXTERN void Exit_Upon_Error( const char *Format, ... )
 #endif
    va_start( Arg_List, Format );
 
-#if !defined( WIN32 )   // || defined( SKL_LIGHT_CODE )
+#if defined(USE_SDL) || !defined(WIN32)   // || defined( SKL_LIGHT_CODE )
 
    fprintf( _Std_Err_, "Error:" );
    vfprintf( _Std_Err_, Format, Arg_List );
@@ -115,7 +115,7 @@ EXTERN void *Out_String( const char *Format, ... )
 
    va_start( Arg_List, Format );
 
-#if !defined( WIN32 )   // || defined( SKL_LIGHT_CODE )
+#if defined(USE_SDL) || !defined(WIN32)   // || defined( SKL_LIGHT_CODE )
 
    vfprintf( _Std_Out_, Format, Arg_List );
    fflush( _Std_Out_ );
@@ -142,7 +142,7 @@ EXTERN void *Out_Message( const char *Format, ... )
 
    va_start( Arg_List, Format );
 
-#if !defined( WIN32 )   // || defined( SKL_LIGHT_CODE )
+#if defined(USE_SDL) || !defined( WIN32 )   // || defined( SKL_LIGHT_CODE )
    vfprintf( _Std_Out_, Format, Arg_List );
    fprintf( _Std_Out_, "\n" ); 
    fflush( _Std_Out_ );

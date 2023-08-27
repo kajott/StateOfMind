@@ -8,7 +8,24 @@
 
 /********************************************************************/
 
-#if defined( LNX ) || defined(__DJGPP__) || defined( UNIX )
+#if defined( USE_SDL )
+
+EXTERN void My_setitimer( ULINT Start )
+{
+}
+
+EXTERN long My_getitimer( )
+{
+   return 0;
+}
+
+EXTERN void My_closeitimer( )
+{
+}
+
+/********************************************************************/
+
+#elif defined( LNX ) || defined(__DJGPP__) || defined( UNIX )
 
 static FLT Timer_f = 0.0;
 static FLT Timer_o = 0.0;
@@ -90,7 +107,9 @@ EXTERN void My_closeitimer( )
 /********************************************************************/
 /********************************************************************/
 
-#if defined( __WATCOMC__ ) || defined( WIN32 )
+#if defined( USE_SDL )
+// see above
+#elif defined( __WATCOMC__ ) || defined( WIN32 )
 
 #include <sys/timeb.h>
 static long Timer_o = 0;

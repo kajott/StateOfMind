@@ -13,7 +13,7 @@ extern void Do_Blur_Y( VBUFFER *Out );
 extern INT LAST_PHASE, NB_PHASE;
 extern PHASE Phases[];
 
-#if !defined( WIN32 )
+#if defined( USE_SDL ) || !defined( WIN32 )
 
 #include "mem_map.h"
 #include "driver.h"

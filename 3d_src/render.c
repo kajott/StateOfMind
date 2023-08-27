@@ -264,7 +264,7 @@ EXTERN void Render_World( WORLD *W, OBJ_NODE *Camera )
 
 	// THIS IS A HACK! SOME DDRAW DRIVER DON'T RESTORE
 	// FPU CONTROL WORD. WE NEED TO RE-INIT. :(
-#if defined(WIN32)	
+#if !defined(USE_SDL) && defined(WIN32)
 	Enter_Engine_Asm();   
 #endif
 

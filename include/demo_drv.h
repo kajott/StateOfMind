@@ -15,7 +15,9 @@
 #include <time.h>
 #endif
 
-#if defined( LNX ) || defined( UNIX ) || defined(__DJGPP__)
+#if defined( USE_SDL )
+// nothing specific to include here
+#elif defined( LNX ) || defined( UNIX ) || defined(__DJGPP__)
 #include <sys/time.h>
 #endif
 

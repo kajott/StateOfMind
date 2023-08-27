@@ -14,7 +14,7 @@
 #include "mp3.h"
 #include "fonts.h"
 
-#if !defined( WIN32 )
+#if defined( USE_SDL ) || !defined( WIN32 )
 
 #include "lib_gfx.h"
 EXTERN MEM_ZONE *The_Screen=NULL;
@@ -84,13 +84,13 @@ static void Destroy_All( )
    if ( !No_Sound ) Close_Audio( );
    if ( The_Screen!=NULL ) Driver_Close( The_Screen );
    The_Screen  = NULL;
-#if !defined(WIN32)
+#if defined( USE_SDL ) || !defined( WIN32 )
    if ( Real_Screen!=NULL ) ZONE_DESTROY(Real_Screen);
    Real_Screen = NULL;
 #endif
 }
 
-#if !defined(WIN32)
+#if defined( USE_SDL ) || !defined( WIN32 )
 static void Banner( )
 {
    Out_Message( "\n- SoM v1.3 -" );
@@ -99,7 +99,7 @@ static void Banner( )
 
 static void Help( )
 {
-#if !defined(WIN32)
+#if defined( USE_SDL ) || !defined( WIN32 )
    Banner( );
    Out_Message( "\noptions:" );
    Out_Message( "  -double ........... window size x2" );
@@ -155,7 +155,7 @@ static void Select_Screen_VBuffer( VBUFFER *VBuf, MEM_ZONE *Screen )
 
 EXTERN void Setup_Video( )
 {
-#if defined( WIN32 )
+#if !defined( USE_SDL ) && defined( WIN32 )
 
    Register_Video_Support( 1, NULL );
    The_Screen = Driver_Call( NULL );
@@ -209,7 +209,7 @@ Failed:
    exit( 1 );
 }
 
-#if !defined(WIN32)
+#if defined( USE_SDL ) || !defined( WIN32 )
 void Do_Flush() {
    if (DoubleSize) 
    {
@@ -309,7 +309,7 @@ int main( int argc, char **argv )
 #ifdef LOWMEM
          else if ( !strcmp( argv[n], "-lowmem" ) ) Low_Mem = TRUE;
 #endif
-#if defined(WIN32)
+#if defined( USE_SDL ) || defined( WIN32 )
          else if ( !strcmp( argv[n], "-nofull" ) ) FullScreen = FALSE;
 #endif
 #ifdef DEBUG_OK
@@ -350,7 +350,7 @@ int main( int argc, char **argv )
 
     Init_Timing( LAST_PHASE, Phases );
 
-#if defined(WIN32)
+#if !defined( USE_SDL ) && defined( WIN32 )
    if ( Launch_Dialog()==0 ) return 0;
 #else
    Load_All();
@@ -371,7 +371,7 @@ int main( int argc, char **argv )
    MP3_Strm = MP3_Init( MP3_File, _MP3_Out_, MP3_Vol );
    if ( MP3_Strm==NULL )   // No_Sound = TRUE;
    {
-#if defined(WIN32)
+#if defined( USE_SDL ) || !defined( WIN32 )
       Driver_Close( The_Screen );
       The_Screen=NULL;
       Out_Message( "Sound initialization failed.\nPlease use '-nosound' option to proceed anyway." );
@@ -393,7 +393,7 @@ Ok:
 
    Start_Demo( Try-1 );
 
-#if defined( WIN32 )
+#if !defined( USE_SDL ) && defined( WIN32 )
    
    while(1)
    {
@@ -468,7 +468,7 @@ Finished:
 
    Destroy_All( );
 
-#if !defined(WIN32)
+#if defined( USE_SDL ) || !defined( WIN32 )
    Banner( );
    Out_Message( "\n'%s -h' for options list.\n", argv[0] );
 #endif

@@ -9,7 +9,7 @@
 
 #include <sys/stat.h>
 
-#ifdef WIN32
+#if !defined(USE_SDL) && defined(WIN32)
 #include <windows.h>
 #include <windowsx.h>
 #include <direct.h>
@@ -39,7 +39,7 @@ static FILE *Open_Dat_File( STRING Switch )
 {
    Dat_File = fopen( Dat_File_Name, Switch );
    if ( Dat_File == NULL )
-#ifdef WIN32
+#if !defined(USE_SDL) && defined(WIN32)
    {
       char S[1024], *Cwd;
       Cwd = getcwd( NULL, 256 );

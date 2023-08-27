@@ -75,7 +75,7 @@ typedef unsigned long long int ULINT;
 
       // I/O standard and custom
 
-//#include <string.h>
+#include <string.h>
 #include <time.h>
 
 #include "msg.h"
