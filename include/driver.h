@@ -172,6 +172,10 @@ struct _G_DRIVER_ {
 
 /********************************************************/ 
 
+#if defined( USE_SDL )
+#include "drv_sdl.h"
+#endif
+
 #if defined( USE_DDRAW )
 #include "drv_ddrw.h"
 #undef MEM_IMAGE     // <= defined in winnt.h!!!!
@@ -192,6 +196,9 @@ extern void Register_Video_Support( INT Nb, ... );
 /********************************************************/
 
       // complete setup for all drivers
+#ifndef _G_SDL_DRIVER_
+#define _G_SDL_DRIVER_ NULL
+#endif
 #ifndef _G_X11_DRIVER_
 #define _G_X11_DRIVER_ NULL
 #endif

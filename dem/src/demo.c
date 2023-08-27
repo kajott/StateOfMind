@@ -169,11 +169,7 @@ EXTERN void Setup_Video( )
 
 #else
 
-#ifndef USE_SVGA_LIB
-#define  _G_SVGL_DRIVER_ 0
-#endif
-
-   Register_Video_Support( 4, _G_DGA_DRIVER_,
+   Register_Video_Support( 5, _G_SDL_DRIVER_, _G_DGA_DRIVER_,
       _G_X11_DRIVER_, _G_SVGL_DRIVER_, _G_VBE_DRIVER_ );
    if ( !DoubleSize ) 
       The_Screen = (MEM_ZONE*)Driver_Call( NULL,
@@ -272,11 +268,11 @@ int main( int argc, char **argv )
 {
    INT Try, n;
    FLT MP3_Vol;
-#if defined(WIN32)
-   FullScreen = TRUE;
+#if defined( USE_SDL ) || defined( WIN32 )
+   FullScreen = FALSE;//DEBUG: TRUE;
 #endif
    DoubleSize = FALSE;
-   No_Sound = FALSE;
+   No_Sound = TRUE;//DEBUG: FALSE;
    Low_Mem = FALSE;
    MP3_File = NULL;
    _MP3_Out_ = MP3_OUT_STEREO|MP3_OUT_16BITS;

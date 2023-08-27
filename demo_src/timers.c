@@ -10,13 +10,20 @@
 
 #if defined( USE_SDL )
 
+#include <SDL.h>
+
+static ULINT Timer_offset = 0;
+static Uint32 Timer_start = 0;
+
 EXTERN void My_setitimer( ULINT Start )
 {
+   Timer_offset = Start;
+   Timer_start = SDL_GetTicks();
 }
 
 EXTERN long My_getitimer( )
 {
-   return 0;
+   return (long)(SDL_GetTicks() - Timer_start) + (long)(Timer_offset);
 }
 
 EXTERN void My_closeitimer( )
