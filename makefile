@@ -3,6 +3,8 @@
 #          Skal98
 ##########################
 
+# DO NOT USE THIS! It's superseded by CMakeLists.txt -- KeyJ 2023
+
 .EXPORT_ALL_VARIABLES:
 
 ##############################################################

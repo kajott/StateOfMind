@@ -1,3 +1,9 @@
 build
 SDL2_win32
+SDL2.dll
+mind.dat
 mind_dat.unpacked
+mind*.exe
+mind*.pdb
+mind
+mind_debug
