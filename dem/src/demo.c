@@ -272,7 +272,7 @@ int main( int argc, char **argv )
    FullScreen = FALSE;//DEBUG: TRUE;
 #endif
    DoubleSize = FALSE;
-   No_Sound = TRUE;//DEBUG: FALSE;
+   No_Sound = FALSE;
    Low_Mem = FALSE;
    MP3_File = NULL;
    _MP3_Out_ = MP3_OUT_STEREO|MP3_OUT_16BITS;

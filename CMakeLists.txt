@@ -42,6 +42,7 @@ add_library (audio STATIC
     au_src/audio.c
     au_src/init.c
     au_src/drv_wav.c
+    au_src/drv_sdl.c
 )
 target_include_directories (audio PUBLIC include ${SDL2INC})
 target_link_libraries (audio PUBLIC SDL2)

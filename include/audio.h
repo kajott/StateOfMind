@@ -67,6 +67,11 @@ extern BYTE *Init_Audio_Buffer( INT Len );
 
 #ifndef NO_SOUND
 
+#if defined( USE_SDL )
+extern AUDIO_DRIVER _SDL_Audio_Drv_;
+#define _SDL_AUDIO_DRIVER_ (&_SDL_Audio_Drv_)
+#endif
+
 #if defined( LNX ) || defined( UNIX )
 extern AUDIO_DRIVER _OSS_Drv_;
 #define _OSS_DRIVER_    (&_OSS_Drv_)
