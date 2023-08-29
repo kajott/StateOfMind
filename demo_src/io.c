@@ -150,8 +150,9 @@ Rewind:
          c = fgetc( Dat_File );
          if ( c==EOF ) goto Rewind;
       }
-      while ( c!='\n' && i<99 );
+      while ( c>' ' && i<99 );
       Line[i]='\0';
+      if (!Line[0]) { c = EOF; goto Rewind; }
 #if 0
       if ( c==EOF )
       {
@@ -161,6 +162,7 @@ Rewind:
       }
 #endif
       fscanf( Dat_File, "%ld\n", &Length );
+      if (Length <= 0) { c = EOF; goto Rewind; }
       if ( !strcmp( Name, Line ) ) break;
       fseek( Dat_File, Length, SEEK_CUR );   // Skip this block
    }

@@ -13,7 +13,7 @@ if (MSVC)
 endif ()
 
 if (WIN32)
-    link_directories (SDL2_win32/lib/x86)
+    link_directories (SDL2_win32/lib/x64)
     set (SDL2_DIR SDL2_win32/cmake)
 endif ()
 find_package (SDL2 REQUIRED)

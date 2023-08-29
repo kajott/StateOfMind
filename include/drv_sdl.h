@@ -28,6 +28,8 @@
 extern int FullScreen;
 
 typedef struct {
+#pragma pack(1)
+
    MEM_ZONE_DRIVER_FIELDS
 
    /* generic */
@@ -43,6 +45,8 @@ typedef struct {
    UINT          The_Texture;
    UINT          The_Shader;
    INT           Loc_uSize;
+
+#pragma pack()
 } MEM_ZONE_SDL;
 
 extern _G_DRIVER_ __G_SDL_DRIVER_;

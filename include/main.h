@@ -6,6 +6,8 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
+#include <stdint.h>
+
 #define EXTERN
 
 #ifndef __WATCOMC__
@@ -35,7 +37,7 @@ typedef float              FLT;
 
 typedef unsigned int       UINT;
 typedef int                INT;
-typedef unsigned long int  ADDR;
+typedef uintptr_t          ADDR;
 
    // for the gfx lib...
 typedef PIXEL COLOR_ENTRY[4];
