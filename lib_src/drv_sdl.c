@@ -12,7 +12,8 @@
 #include "mem_map.h"
 #include "driver.h"
 
-#define GL_DEBUG 1
+//#define GL_DEBUG 1
+#define GL_DEBUG !defined(NDEBUG)
 
 const float ASPECT_RATIO = 4.f / 3.f;
 

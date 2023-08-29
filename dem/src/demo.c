@@ -269,7 +269,11 @@ int main( int argc, char **argv )
    INT Try, n;
    FLT MP3_Vol;
 #if defined( USE_SDL ) || defined( WIN32 )
-   FullScreen = FALSE;//DEBUG: TRUE;
+   #ifdef NDEBUG
+      FullScreen = TRUE;
+   #else
+      FullScreen = FALSE;
+   #endif
 #endif
    DoubleSize = FALSE;
    No_Sound = FALSE;
