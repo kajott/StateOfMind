@@ -15,7 +15,8 @@
 //#define GL_DEBUG 1
 #define GL_DEBUG !defined(NDEBUG)
 
-const float ASPECT_RATIO = 4.f / 3.f;
+const float ASPECT_RATIO = 320.f / 200.f;
+#define DEFAULT_WINDOW_SIZE 1280,800
 
 extern MEM_ZONE_METHODS SDLdrv_Methods;
 
@@ -176,8 +177,7 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER)) { return 0; }
 
    drv->The_Window = SDL_CreateWindow(WindowTitle,
-      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-      1024, 768,
+      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, DEFAULT_WINDOW_SIZE,
       (FullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : SDL_WINDOW_RESIZABLE) | SDL_WINDOW_OPENGL);
    if (!drv->The_Window) { return 0; }
 
