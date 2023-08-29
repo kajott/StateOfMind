@@ -161,7 +161,6 @@ static void SDLdrv_UpdateViewport(MEM_ZONE_SDL *drv, INT vpWidth, INT vpHeight)
    if (w > vpWidth) {
       w = vpWidth;  h = vpWidth / ASPECT_RATIO;
    }
-   glUseProgram(drv->The_Shader);
    glUniform2f(drv->Loc_uSize, w / vpWidth, -h / vpHeight);
 }
 
@@ -212,8 +211,8 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
 
    glGenTextures(1, &drv->The_Texture);
    glBindTexture(GL_TEXTURE_2D, drv->The_Texture);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
@@ -242,10 +241,14 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
    static const char* fsSrc =
          "#version 330"
    "\n"  "in vec2 vTexCoord;"
+   "\n"  "uniform vec2 uTexSize;"
    "\n"  "uniform sampler2D uTex;"
    "\n"  "layout(location=0) out vec4 oColor;"
    "\n"  "void main() {"
-   "\n"  "  oColor = texture(uTex, vTexCoord);"
+   "\n"  "  vec2 p = vTexCoord * uTexSize;"
+   "\n"  "  vec2 i = floor(p + vec2(.5));"
+   "\n"  "  p = clamp((p - i) / fwidth(p), -.5, .5) + i;"
+   "\n"  "  oColor = texture(uTex, p / uTexSize);"
    "\n"  "}";
    glShaderSource(fs, 1, &fsSrc, NULL);
    glCompileShader(fs);
@@ -260,8 +263,11 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
    glGetProgramInfoLog(drv->The_Shader, 1024, NULL, log);
    DEBUG(Out_Message("program link log:\n%s", log));
 #endif
+   glUseProgram(drv->The_Shader);
 
    drv->Loc_uSize = glGetUniformLocation(drv->The_Shader, "uSize");
+   glUniform2f(glGetUniformLocation(drv->The_Shader, "uTexSize"), drv->Display_Width, drv->Display_Height);
+
    GLint vp[4];
    glGetIntegerv(GL_VIEWPORT, vp);
    SDLdrv_UpdateViewport(drv, vp[2], vp[3]);
@@ -279,7 +285,6 @@ static void SDLdrv_ShowFrame(MEM_ZONE_SDL *drv)
    glBindTexture(GL_TEXTURE_2D, drv->The_Texture);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, drv->Display_Width, drv->Display_Height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, (const GLvoid*)drv->Screen_Buffer);
 
-   glUseProgram(drv->The_Shader);
    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 #if GL_DEBUG
