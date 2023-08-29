@@ -457,7 +457,12 @@ Ok:
             }
             break;
 #endif
-            default: goto Finished; break;
+
+            case 'q':
+            case 'Q':
+            case 27:  // Escape
+               goto Finished;
+            default: break;
          }
       } 
    }
