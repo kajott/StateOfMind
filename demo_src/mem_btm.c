@@ -32,7 +32,7 @@ static PIXEL *Get_Scanline( MEM_ZONE *M, INT Y )
    return( (*DEFAULT_METHODS->Get_Scanline)( M, Y ) );
 }
 
-static MEM_ZONE_METHODS Zone_Methods =
+MEM_ZONE_METHODS Zone_Methods =
 {
    NULL, NULL, Destroy, Get_Scanline, NULL,
 };

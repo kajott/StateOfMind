@@ -189,7 +189,7 @@ MEM_ZONE_METHODS Default_Mem_Zone_Methods =
    D_Set_Position,
 };
 
-static MEM_ZONE_METHODS Virtual_Zone_Methods =
+MEM_ZONE_METHODS Virtual_Zone_Methods =
 {
    D_Propagate_Virtual, D_Flush_Virtual, D_Destroy, D_Get_Scanline,
    D_Set_Position

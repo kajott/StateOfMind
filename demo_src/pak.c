@@ -431,7 +431,7 @@ No_Backup:
 
 /*******************************************************************/
 
-static MEM_ZONE_METHODS Default_Pak_Methods =
+MEM_ZONE_METHODS Default_Pak_Methods =
 {
    Propagate_Pak, Flush_Pak, Destroy_Pak, Get_Scanline_Pak,
    Set_Position_Pak

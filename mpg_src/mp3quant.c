@@ -20,7 +20,7 @@ EXTERN void (*MP3_Handle_Signal)( INT Len, const FLT *Left, const FLT *Right ) =
 EXTERN FLT MP3_Out_Scale;
 
 static USHORT *Re_Order;
-static INT HUFF_Non_Zero[2];
+INT HUFF_Non_Zero[2];
 #ifndef _SKIP_MPEG2_
 static const FLT *Tab_is2_Ptr;
 #endif

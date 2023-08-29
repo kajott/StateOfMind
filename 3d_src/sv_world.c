@@ -25,8 +25,8 @@ static MESH *Da_Mesh = NULL;
 static CHUNK_TYPE Current_Data;
 // static SHORT Current_ID;
 
-static OBJ_NODE *Cur_Node;
-static OBJECT *Cur_Obj;
+OBJ_NODE *Cur_Node;
+OBJECT *Cur_Obj;
 static MESH *Cur_Mesh;
 
 EXTERN INT Dump_Objects_List( void *Dum );

@@ -26,11 +26,9 @@ struct BBOX {
 /******************************************************************/
 
 typedef enum {
-#pragma pack(1)
 
  SIDE_1, SIDE_2, SPLIT
 
-#pragma pack()
 } BOX_TEST_RESULT;
 
 extern BOX_TEST_RESULT Test_Box_Plane( PLANE, BBOX * );

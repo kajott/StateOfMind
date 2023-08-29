@@ -633,7 +633,7 @@ static INT Post_Fx7( FLT Tick_X )
 /********************************************************************/
 /********************************************************************/
 
-static FONT_FX Font_FX[] = { 
+FONT_FX Font_FX[] = { 
    { Init_Fx1, Do_Fx1,   NULL },          // 0
    { Init_Fx2, Do_Fx2,   NULL },          // 1
    { Init_Fx2, Do_Fx22,  NULL },          // 2

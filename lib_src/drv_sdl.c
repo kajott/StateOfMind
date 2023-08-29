@@ -472,7 +472,7 @@ EXTERN INT SDLdrv_Change_CMap( MEM_ZONE_DRIVER *M, INT Nb, COLOR_ENTRY *CMap )
 
 /********************************************************/
 
-static MEM_ZONE_METHODS SDLdrv_Methods = 
+MEM_ZONE_METHODS SDLdrv_Methods = 
 {
    SDLdrv_Propagate,
    SDLdrv_Flush,

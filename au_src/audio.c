@@ -15,7 +15,7 @@ static INT Last_Driver = 0;
 EXTERN USHORT Audio_Out_Mode = 0, Audio_In_Mode = 0;
 EXTERN INT Audio_Mix_Freq = 0; 
 EXTERN INT ABuf_Len = 0;
-static INT ABuf_Head = 0, ABuf_Tail = 0;
+INT ABuf_Head = 0, ABuf_Tail = 0;
 EXTERN BYTE *Audio_Buf = NULL;
 
 /******************************************************************/

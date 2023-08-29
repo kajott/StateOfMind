@@ -307,6 +307,13 @@ target_include_directories (mind PUBLIC include dem/include ${SDL2INC})
 target_link_libraries (mind PUBLIC fx1 demo mpg jpg bsp ray lib3d audio gfxlib SDL2main)
 target_compile_definitions (mind PRIVATE UNIX)
 
+###############################################################################
+
+if (NOT WIN32)
+    find_package (Threads REQUIRED)
+    target_link_libraries (mind PUBLIC Threads::Threads m)
+endif ()
+
 # make the binary appear in the project's root directory
 set_target_properties (mind PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY                "${CMAKE_CURRENT_LIST_DIR}"
