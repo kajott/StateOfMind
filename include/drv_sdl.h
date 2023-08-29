@@ -41,6 +41,8 @@ typedef struct {
 
    /* OpenGL specific */
    UINT          The_Texture;
+   UINT          The_Shader;
+   INT           Loc_uSize;
 } MEM_ZONE_SDL;
 
 extern _G_DRIVER_ __G_SDL_DRIVER_;

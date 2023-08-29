@@ -12,6 +12,10 @@
 #include "mem_map.h"
 #include "driver.h"
 
+#define GL_DEBUG 1
+
+const float ASPECT_RATIO = 4.f / 3.f;
+
 extern MEM_ZONE_METHODS SDLdrv_Methods;
 
 EXTERN int FullScreen = TRUE;
@@ -37,12 +41,15 @@ typedef   signed short GLshort;
 typedef unsigned short GLushort;
 typedef   signed int   GLint;
 typedef unsigned int   GLuint;
+typedef char GLchar;
 typedef int GLsizei;
 typedef float GLfloat;
 typedef float GLclampf;
 typedef unsigned int GLhandleARB;
 
+#define GL_TRIANGLE_STRIP 5
 #define GL_COLOR_BUFFER_BIT 0x00004000
+#define GL_VIEWPORT 0x0BA2
 #define GL_TEXTURE_2D 0x0DE1
 #define GL_RGB 0x1907
 #define GL_NEAREST 0x2600
@@ -54,62 +61,115 @@ typedef unsigned int GLhandleARB;
 #define GL_CLAMP_TO_EDGE 0x812F
 #define GL_UNSIGNED_SHORT_5_6_5 0x8363
 #define GL_UNSIGNED_SHORT_5_6_5_REV 0x8364
+#define GL_FRAGMENT_SHADER 0x8B30
+#define GL_VERTEX_SHADER 0x8B31
+#define GL_DEBUG_OUTPUT 0x92E0
 
 typedef void (GLAPIENTRYP PFNGLCLEARPROC)(GLbitfield mask);
 GLAPI PFNGLCLEARPROC glClear;
-
-typedef void (GLAPIENTRYP PFNGLENABLEPROC)(GLenum cap);
-GLAPI PFNGLENABLEPROC glEnable;
-
+typedef void (GLAPIENTRYP PFNGLVIEWPORTPROC)(GLint x, GLint y, GLsizei width, GLsizei height);
+GLAPI PFNGLVIEWPORTPROC glViewport;
 typedef void (GLAPIENTRYP PFNGLGENTEXTURESPROC)(GLsizei n, GLuint *textures);
 GLAPI PFNGLGENTEXTURESPROC glGenTextures;
-
 typedef void (GLAPIENTRYP PFNGLBINDTEXTUREPROC)(GLenum target, GLuint texture);
 GLAPI PFNGLBINDTEXTUREPROC glBindTexture;
-
 typedef void (GLAPIENTRYP PFNGLTEXPARAMETERIPROC)(GLenum target, GLenum pname, GLint param);
 GLAPI PFNGLTEXPARAMETERIPROC glTexParameteri;
-
 typedef void (GLAPIENTRYP PFNGLTEXIMAGE2DPROC)(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels);
 GLAPI PFNGLTEXIMAGE2DPROC glTexImage2D;
-
 typedef void (GLAPIENTRYP PFNGLGETINTEGERVPROC)(GLenum pname, GLint *data);
 GLAPI PFNGLGETINTEGERVPROC glGetIntegerv;
+typedef GLuint (GLAPIENTRYP PFNGLCREATEPROGRAMPROC)(void);
+GLAPI PFNGLCREATEPROGRAMPROC glCreateProgram;
+typedef GLuint (GLAPIENTRYP PFNGLCREATESHADERPROC)(GLenum type);
+GLAPI PFNGLCREATESHADERPROC glCreateShader;
+typedef void (GLAPIENTRYP PFNGLSHADERSOURCEPROC)(GLuint shader, GLsizei count, const GLchar *const*string, const GLint *length);
+GLAPI PFNGLSHADERSOURCEPROC glShaderSource;
+typedef void (GLAPIENTRYP PFNGLCOMPILESHADERPROC)(GLuint shader);
+GLAPI PFNGLCOMPILESHADERPROC glCompileShader;
+typedef void (GLAPIENTRYP PFNGLATTACHSHADERPROC)(GLuint program, GLuint shader);
+GLAPI PFNGLATTACHSHADERPROC glAttachShader;
+typedef void (GLAPIENTRYP PFNGLLINKPROGRAMPROC)(GLuint program);
+GLAPI PFNGLLINKPROGRAMPROC glLinkProgram;
+typedef void (GLAPIENTRYP PFNGLUSEPROGRAMPROC)(GLuint program);
+GLAPI PFNGLUSEPROGRAMPROC glUseProgram;
+typedef GLint (GLAPIENTRYP PFNGLGETUNIFORMLOCATIONPROC)(GLuint program, const GLchar *name);
+GLAPI PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
+typedef void (GLAPIENTRYP PFNGLUNIFORM2FPROC)(GLint location, GLfloat v0, GLfloat v1);
+GLAPI PFNGLUNIFORM2FPROC glUniform2f;
+typedef void (GLAPIENTRYP PFNGLGENVERTEXARRAYSPROC)(GLsizei n, GLuint *arrays);
+GLAPI PFNGLGENVERTEXARRAYSPROC glGenVertexArrays;
+typedef void (GLAPIENTRYP PFNGLBINDVERTEXARRAYPROC)(GLuint array);
+GLAPI PFNGLBINDVERTEXARRAYPROC glBindVertexArray;
+typedef void (GLAPIENTRYP PFNGLDRAWARRAYSPROC)(GLenum mode, GLint first, GLsizei count);
+GLAPI PFNGLDRAWARRAYSPROC glDrawArrays;
 
-
-
-typedef void (GLAPIENTRYP PFNGLBEGINPROC)(GLenum mode);
-GLAPI PFNGLBEGINPROC glBegin;
-typedef void (GLAPIENTRYP PFNGLENDPROC)(void);
-GLAPI PFNGLENDPROC glEnd;
-typedef void (GLAPIENTRYP PFNGLVERTEX2FPROC)(GLfloat x, GLfloat y);
-GLAPI PFNGLVERTEX2FPROC glVertex2f;
-typedef void (GLAPIENTRYP PFNGLTEXCOORD2FPROC)(GLfloat s, GLfloat t);
-GLAPI PFNGLTEXCOORD2FPROC glTexCoord2f;
-
+#if GL_DEBUG
+typedef void (GLAPIENTRYP PFNGLENABLEPROC)(GLenum cap);
+GLAPI PFNGLENABLEPROC glEnable;
+typedef void (GLAPIENTRYP PFNGLGETSHADERINFOLOGPROC)(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
+GLAPI PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
+typedef void (GLAPIENTRYP PFNGLGETPROGRAMINFOLOGPROC)(GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
+GLAPI PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog;
+typedef GLenum (GLAPIENTRYP PFNGLGETERRORPROC)(void);
+GLAPI PFNGLGETERRORPROC glGetError;
+typedef void (GLAPIENTRY *GLDEBUGPROC)(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const GLchar *message,const void *userParam);
+typedef void (GLAPIENTRYP PFNGLDEBUGMESSAGECALLBACKPROC)(GLDEBUGPROC callback, void* userParam);
+GLAPI PFNGLDEBUGMESSAGECALLBACKPROC glDebugMessageCallback;
+#endif
 
 static int LoadGL(void)
 {
    #define LOAD_PROC(type, name) \
       name = (type) SDL_GL_GetProcAddress(#name); \
       if (!name) { Out_Error("can not load OpenGL function '%s'", #name); return 0; }
-   LOAD_PROC(PFNGLCLEARPROC,         glClear);
-   LOAD_PROC(PFNGLENABLEPROC,        glEnable);
-   LOAD_PROC(PFNGLGENTEXTURESPROC,   glGenTextures);
-   LOAD_PROC(PFNGLBINDTEXTUREPROC,   glBindTexture);
-   LOAD_PROC(PFNGLTEXPARAMETERIPROC, glTexParameteri);
-   LOAD_PROC(PFNGLTEXIMAGE2DPROC,    glTexImage2D);
-   LOAD_PROC(PFNGLGETINTEGERVPROC,   glGetIntegerv);
-
-LOAD_PROC(PFNGLBEGINPROC, glBegin);
-LOAD_PROC(PFNGLENDPROC, glEnd);
-LOAD_PROC(PFNGLVERTEX2FPROC, glVertex2f);
-LOAD_PROC(PFNGLTEXCOORD2FPROC, glTexCoord2f);
-
+   LOAD_PROC(PFNGLCLEARPROC,                glClear);
+   LOAD_PROC(PFNGLVIEWPORTPROC,             glViewport);
+   LOAD_PROC(PFNGLGENTEXTURESPROC,          glGenTextures);
+   LOAD_PROC(PFNGLBINDTEXTUREPROC,          glBindTexture);
+   LOAD_PROC(PFNGLTEXPARAMETERIPROC,        glTexParameteri);
+   LOAD_PROC(PFNGLTEXIMAGE2DPROC,           glTexImage2D);
+   LOAD_PROC(PFNGLGETINTEGERVPROC,          glGetIntegerv);
+   LOAD_PROC(PFNGLCREATEPROGRAMPROC,        glCreateProgram);
+   LOAD_PROC(PFNGLCREATESHADERPROC,         glCreateShader);
+   LOAD_PROC(PFNGLSHADERSOURCEPROC,         glShaderSource);
+   LOAD_PROC(PFNGLCOMPILESHADERPROC,        glCompileShader);
+   LOAD_PROC(PFNGLATTACHSHADERPROC,         glAttachShader);
+   LOAD_PROC(PFNGLLINKPROGRAMPROC,          glLinkProgram);
+   LOAD_PROC(PFNGLUSEPROGRAMPROC,           glUseProgram);
+   LOAD_PROC(PFNGLGETUNIFORMLOCATIONPROC,   glGetUniformLocation);
+   LOAD_PROC(PFNGLUNIFORM2FPROC,            glUniform2f);
+   LOAD_PROC(PFNGLGENVERTEXARRAYSPROC,      glGenVertexArrays);
+   LOAD_PROC(PFNGLBINDVERTEXARRAYPROC,      glBindVertexArray);
+   LOAD_PROC(PFNGLDRAWARRAYSPROC,           glDrawArrays);
+#if GL_DEBUG
+   LOAD_PROC(PFNGLENABLEPROC,               glEnable);
+   LOAD_PROC(PFNGLGETSHADERINFOLOGPROC,     glGetShaderInfoLog);
+   LOAD_PROC(PFNGLGETPROGRAMINFOLOGPROC,    glGetProgramInfoLog);
+   LOAD_PROC(PFNGLGETERRORPROC,             glGetError);
+   LOAD_PROC(PFNGLDEBUGMESSAGECALLBACKPROC, glDebugMessageCallback);
+#endif
    return 1;
 }
 
 /********************************************************/
+
+static void SDLdrv_UpdateViewport(MEM_ZONE_SDL *drv, INT vpWidth, INT vpHeight)
+{
+   DEBUG(Out_Message("viewport size: %dx%d", vpWidth, vpHeight));
+   float w = vpHeight * ASPECT_RATIO, h = vpHeight;
+   if (w > vpWidth) {
+      w = vpWidth;  h = vpWidth / ASPECT_RATIO;
+   }
+   glUseProgram(drv->The_Shader);
+   glUniform2f(drv->Loc_uSize, w / vpWidth, -h / vpHeight);
+}
+
+#if GL_DEBUG
+void GLAPIENTRY myGLdebugProc(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const GLchar *message,const void *userParam) {
+   DEBUG(Out_Message("[GL] src=0x%04X type=0x%04X id=0x%04X sev=0x%04X %s", source, type, id, severity, message));
+}
+#endif
 
 static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
 {
@@ -118,7 +178,7 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
    drv->The_Window = SDL_CreateWindow(WindowTitle,
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
       1024, 768,
-      (FullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0) | SDL_WINDOW_OPENGL);
+      (FullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : SDL_WINDOW_RESIZABLE) | SDL_WINDOW_OPENGL);
    if (!drv->The_Window) { return 0; }
 
    if (FullScreen) { SDL_ShowCursor(SDL_DISABLE); }
@@ -130,9 +190,9 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,   0);
    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 0);
    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, SDL_TRUE);
-//   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-//   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-//   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,  SDL_GL_CONTEXT_PROFILE_CORE);
+   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,  SDL_GL_CONTEXT_PROFILE_CORE);
 
    drv->The_Context = SDL_GL_CreateContext(drv->The_Window);
    if (!drv->The_Context) { return 0; }
@@ -141,6 +201,14 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
    SDL_GL_SetSwapInterval(1);
 
    if (!LoadGL()) { return 0; }
+#if GL_DEBUG
+   glDebugMessageCallback(myGLdebugProc, NULL);
+   glEnable(GL_DEBUG_OUTPUT);
+#endif
+
+   GLuint vao;  // it's nonsense, but we *have* to do it; some drivers insist
+   glGenVertexArrays(1, &vao);
+   glBindVertexArray(vao);
 
    glGenTextures(1, &drv->The_Texture);
    glBindTexture(GL_TEXTURE_2D, drv->The_Texture);
@@ -149,6 +217,58 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
+   drv->The_Shader = glCreateProgram();
+
+   GLuint vs = glCreateShader(GL_VERTEX_SHADER);
+   static const char* vsSrc =
+         "#version 330"
+   "\n"  "uniform vec2 uSize;"
+   "\n"  "out vec2 vTexCoord;"
+   "\n"  "void main() {"
+   "\n"  "  vec2 p = vec2(((gl_VertexID & 2) != 0) ? 1. : 0., ((gl_VertexID & 1) != 0) ? 1. : 0.);"
+   "\n"  "  gl_Position = vec4((p * vec2(2.) - vec2(1.)) * uSize, 0., 1.);"
+   "\n"  "  vTexCoord = p;"
+   "\n"  "}";
+   glShaderSource(vs, 1, &vsSrc, NULL);
+   glCompileShader(vs);
+   glAttachShader(drv->The_Shader, vs);
+#if GL_DEBUG
+   char log[1024];
+   glGetShaderInfoLog(vs, 1024, NULL, log);
+   DEBUG(Out_Message("VS compile log:\n%s", log));
+#endif
+
+   GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
+   static const char* fsSrc =
+         "#version 330"
+   "\n"  "in vec2 vTexCoord;"
+   "\n"  "uniform sampler2D uTex;"
+   "\n"  "layout(location=0) out vec4 oColor;"
+   "\n"  "void main() {"
+   "\n"  "  oColor = texture(uTex, vTexCoord);"
+   "\n"  "}";
+   glShaderSource(fs, 1, &fsSrc, NULL);
+   glCompileShader(fs);
+   glAttachShader(drv->The_Shader, fs);
+#if GL_DEBUG
+   glGetShaderInfoLog(fs, 1024, NULL, log);
+   DEBUG(Out_Message("FS compile log:\n%s", log));
+#endif
+
+   glLinkProgram(drv->The_Shader);
+#if GL_DEBUG
+   glGetProgramInfoLog(drv->The_Shader, 1024, NULL, log);
+   DEBUG(Out_Message("program link log:\n%s", log));
+#endif
+
+   drv->Loc_uSize = glGetUniformLocation(drv->The_Shader, "uSize");
+   GLint vp[4];
+   glGetIntegerv(GL_VIEWPORT, vp);
+   SDLdrv_UpdateViewport(drv, vp[2], vp[3]);
+
+#if GL_DEBUG
+   GLenum err; do { err = glGetError(); if (err) { DEBUG(Out_Message("[Init] GL error 0x%04X", err)); } } while (err);
+#endif
    return 1;
 }
 
@@ -158,14 +278,13 @@ static void SDLdrv_ShowFrame(MEM_ZONE_SDL *drv)
 
    glBindTexture(GL_TEXTURE_2D, drv->The_Texture);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, drv->Display_Width, drv->Display_Height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, (const GLvoid*)drv->Screen_Buffer);
-glEnable(GL_TEXTURE_2D);
-glBegin(7 /*GL_QUADS*/);
-glTexCoord2f(0.f, 0.f);  glVertex2f(-1.f, +1.f);
-glTexCoord2f(0.f, 1.f);  glVertex2f(-1.f, -1.f);
-glTexCoord2f(1.f, 1.f);  glVertex2f(+1.f, -1.f);
-glTexCoord2f(1.f, 0.f);  glVertex2f(+1.f, +1.f);
-glEnd();
 
+   glUseProgram(drv->The_Shader);
+   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+#if GL_DEBUG
+   GLenum err; do { err = glGetError(); if (err) { DEBUG(Out_Message("[Draw] GL error 0x%04X", err)); } } while (err);
+#endif
    SDL_GL_SwapWindow(drv->The_Window);
 }
 
@@ -182,6 +301,13 @@ static EVENT_TYPE SDLdrv_ProcessEvents(MEM_ZONE_SDL *drv)
          case SDL_QUIT:
             drv->Event.Key = 'q';
             return DRV_KEY_PRESS;
+         case SDL_WINDOWEVENT:
+            if (ev.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+            {
+               glViewport(0, 0, ev.window.data1, ev.window.data2);
+               SDLdrv_UpdateViewport(drv, ev.window.data1, ev.window.data2);
+            }
+            break;
          default:
             break;
       }
