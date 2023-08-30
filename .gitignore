@@ -1,5 +1,5 @@
-build
-SDL2_win32
+build*
+SDL2-2.*
 SDL2.dll
 mind.dat
 mind_dat.unpacked

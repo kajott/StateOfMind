@@ -5,20 +5,50 @@ project (StateOfMind)
 set (CMAKE_C_STANDARD 99)
 
 if (MSVC)
-    # ignore warnings:
+    # ignore the most common uncritical warnings:
     # - 4244 + 4305 = int/float/double conversion
     # - 4101 + 4102 = unreferenced variable/label
     add_compile_options (/wd4244 /wd4305 /wd4101 /wd4102)
     add_compile_definitions (_CRT_SECURE_NO_WARNINGS)
 endif ()
 
-if (WIN32)
-    link_directories (SDL2_win32/lib/x64)
-    set (SDL2_DIR SDL2_win32/cmake)
+# set up SDL on Win32+MSVC
+if (MSVC)
+    set (SDL_VERSION "2.28.2")  # <-- feel free to change this
+
+    # set paths
+    set (SDL_SDK_DIR "${CMAKE_CURRENT_LIST_DIR}/SDL2-${SDL_VERSION}")
+    if (CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set (ARCH x64)
+    else ()
+        set (ARCH x86)
+    endif ()
+
+    # download SDL if not already present
+    if (NOT IS_DIRECTORY "${SDL_SDK_DIR}")
+        message (STATUS "SDL2-${SDL_VERSION} not found, downloading and unpacking ...")
+        set (SDL_ARCHIVE "SDL2-devel-${SDL_VERSION}-VC.zip")
+        if (NOT EXISTS "${SDL_ARCHIVE}")
+            file (DOWNLOAD "https://github.com/libsdl-org/SDL/releases/download/release-${SDL_VERSION}/${SDL_ARCHIVE}" "${SDL_ARCHIVE}")
+        endif ()
+        file (ARCHIVE_EXTRACT INPUT "${SDL_ARCHIVE}" DESTINATION "${CMAKE_CURRENT_LIST_DIR}")
+        if (NOT IS_DIRECTORY "${SDL_SDK_DIR}")
+            message (ERROR "SDL download and installation failed (expected to find a directory '${SDL_SDK_DIR}' after extracting '${SDL_ARCHIVE}', but it's not there)")
+        endif ()
+    endif ()
+
+    # ensure that the executable has a suitable SDL2.dll to go with it
+    if (NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/SDL2.dll")
+        file (COPY "${SDL_SDK_DIR}/lib/${ARCH}/SDL2.dll" DESTINATION "${CMAKE_CURRENT_LIST_DIR}")
+    endif ()
+
+    # set up CMake-internal stuff so that find_package() and linking works
+    link_directories ("${SDL_SDK_DIR}/lib/${ARCH}")
+    set (SDL2_DIR "${SDL_SDK_DIR}/cmake")
 endif ()
+
 find_package (SDL2 REQUIRED)
 get_target_property (SDL2INC SDL2::SDL2 INTERFACE_INCLUDE_DIRECTORIES)
-
 add_compile_definitions (USE_SDL)
 
 ###############################################################################
@@ -323,3 +353,12 @@ set_target_properties (mind PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_CURRENT_LIST_DIR}"
     OUTPUT_NAME_DEBUG                       "mind_debug"
 )
+
+# acquire mind.dat if it's not present
+if (NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/mind.dat")
+    message (STATUS "mind.dat not found, downloading and unpacking ...")
+    if (NOT EXISTS mind_v12.zip)
+        file (DOWNLOAD http://files.scene.org/get/parties/1998/theparty98/demo/b_state_w32_v12.zip mind_v12.zip)
+    endif ()
+    file (ARCHIVE_EXTRACT INPUT mind_v12.zip DESTINATION "${CMAKE_CURRENT_LIST_DIR}" PATTERNS mind.dat)
+endif ()
