@@ -141,7 +141,10 @@ extern FILE *F_OPEN( STRING Name, STRING Switch )
 Rewind:
       if ( c==EOF ) 
       {
+         if ( Rewinded )
+            Exit_Upon_Error( " Unexpected EOF in .dat file.\nFile '%s' not found.\n", Name );
          rewind( Dat_File );
+         Rewinded = TRUE;
          c = fgetc( Dat_File );
       }
       i = 0;
