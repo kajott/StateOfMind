@@ -23,6 +23,11 @@ extern MEM_ZONE_METHODS SDLdrv_Methods;
 EXTERN int FullScreen = TRUE;
 static const char* WindowTitle = "Bomb - State of Mind";
 
+#ifndef NDEBUG
+static Uint32 StartTime  = 0;
+static Uint32 FrameCount = 0;
+#endif
+
 /********************************************************/
 
 #ifdef _WIN32
@@ -276,6 +281,9 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
 #if GL_DEBUG
    GLenum err; do { err = glGetError(); if (err) { DEBUG(Out_Message("[Init] GL error 0x%04X", err)); } } while (err);
 #endif
+#ifndef NDEBUG
+   StartTime = SDL_GetTicks();
+#endif
    return 1;
 }
 
@@ -290,6 +298,9 @@ static void SDLdrv_ShowFrame(MEM_ZONE_SDL *drv)
 
 #if GL_DEBUG
    GLenum err; do { err = glGetError(); if (err) { DEBUG(Out_Message("[Draw] GL error 0x%04X", err)); } } while (err);
+#endif
+#ifndef NDEBUG
+   FrameCount++;
 #endif
    SDL_GL_SwapWindow(drv->The_Window);
 }
@@ -323,6 +334,10 @@ static EVENT_TYPE SDLdrv_ProcessEvents(MEM_ZONE_SDL *drv)
 
 static void SDLdrv_Shutdown(MEM_ZONE_SDL *drv)
 {
+#ifndef NDEBUG
+   Uint32 dt = SDL_GetTicks() - StartTime;
+   DEBUG(Out_Message("%d frames in %d ms -> %.2f fps", FrameCount, dt, FrameCount / ((dt ? dt : 1) * 0.001)));
+#endif
    SDL_GL_MakeCurrent(NULL, NULL);
    SDL_GL_DeleteContext(drv->The_Context);
    SDL_DestroyWindow(drv->The_Window);
