@@ -220,8 +220,8 @@ EXTERN void Emit_MC_Polys3( INT Off, INT Index, INT jo )
             MC_Blob->Vertex[Vtx_ID][0] = Slice[0];
             MC_Blob->Vertex[Vtx_ID][2] = Slice[2];
             {
-               FLT y;               
-               y = Slice_B[Off]/( Slice_B[Off-1] - Slice_B[Off] );
+               FLT den = Slice_B[Off-1] - Slice_B[Off];
+               FLT y = den ? (Slice_B[Off]/den) : 0.0f;
                MC_Blob->Vertex[Vtx_ID][1] = Slice[1] + y*MC_SCALE_Y;
             }
             (*_Compute_MC_Normal_)( Vtx_ID );
@@ -233,8 +233,8 @@ EXTERN void Emit_MC_Polys3( INT Off, INT Index, INT jo )
             MC_Blob->Vertex[Vtx_ID][1] = Slice[1];
             MC_Blob->Vertex[Vtx_ID][2] = Slice[2];
             {
-               FLT x;
-               x = Slice_B[Off]/( Slice_B[Off-MCY] - Slice_B[Off] );
+               FLT den = Slice_B[Off-MCY] - Slice_B[Off];
+               FLT x = den ? (Slice_B[Off]/den) : 0.0f;
                MC_Blob->Vertex[Vtx_ID][0] = Slice[0] + x*MC_SCALE_X;
             }
             (*_Compute_MC_Normal_)( Vtx_ID );
@@ -251,8 +251,8 @@ EXTERN void Emit_MC_Polys3( INT Off, INT Index, INT jo )
             MC_Blob->Vertex[Vtx_ID][0] = Slice[0];
             MC_Blob->Vertex[Vtx_ID][1] = Slice[1];
             {
-               FLT z;
-               z = Slice_B[Off]/( Slice_A[Off] - Slice_B[Off] );
+               FLT den = Slice_A[Off] - Slice_B[Off];
+               FLT z = den ? (Slice_B[Off]/den) : 0.0f;
                MC_Blob->Vertex[Vtx_ID][2] = Slice[2] + z*MC_SCALE_Z;
             }
             (*_Compute_MC_Normal_)( Vtx_ID );
