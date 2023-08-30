@@ -13,17 +13,19 @@
 #include <SDL.h>
 
 static ULINT Timer_offset = 0;
-static Uint32 Timer_start = 0;
+static Uint64 Timer_start = 0;
 
 EXTERN void My_setitimer( ULINT Start )
 {
    Timer_offset = Start;
-   Timer_start = SDL_GetTicks();
+   Timer_start = SDL_GetPerformanceCounter();
 }
 
 EXTERN long My_getitimer( )
 {
-   return (long)(SDL_GetTicks() - Timer_start) + (long)(Timer_offset);
+   Uint64 dt = SDL_GetPerformanceCounter() - Timer_start;
+   dt = (dt * 1000u) / SDL_GetPerformanceFrequency();
+   return (long)dt + (long)Timer_offset;
 }
 
 EXTERN void My_closeitimer( )
