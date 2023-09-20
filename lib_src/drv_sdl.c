@@ -179,12 +179,18 @@ void GLAPIENTRY myGLdebugProc(GLenum source,GLenum type,GLuint id,GLenum severit
 
 static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
 {
-   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER)) { return 0; }
+   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER)) {
+      DEBUG(Out_Message("SDL_Init() failed: %s", SDL_GetError()));
+      return 0;
+   }
 
    drv->The_Window = SDL_CreateWindow(WindowTitle,
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, DEFAULT_WINDOW_SIZE,
       (FullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : SDL_WINDOW_RESIZABLE) | SDL_WINDOW_OPENGL);
-   if (!drv->The_Window) { return 0; }
+   if (!drv->The_Window) {
+      DEBUG(Out_Message("SDL_CreateWindow() failed: %s", SDL_GetError()));
+      return 0;
+   }
 
    if (FullScreen) { SDL_ShowCursor(SDL_DISABLE); }
 
@@ -200,7 +206,10 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,  SDL_GL_CONTEXT_PROFILE_CORE);
 
    drv->The_Context = SDL_GL_CreateContext(drv->The_Window);
-   if (!drv->The_Context) { return 0; }
+   if (!drv->The_Context) {
+      DEBUG(Out_Message("SDL_GL_CreateContext() failed: %s", SDL_GetError()));
+      return 0;
+   }
 
    SDL_GL_MakeCurrent(drv->The_Window, drv->The_Context);
    SDL_GL_SetSwapInterval(1);
