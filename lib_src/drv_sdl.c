@@ -55,6 +55,7 @@ typedef float GLclampf;
 typedef unsigned int GLhandleARB;
 
 #define GL_TRIANGLE_STRIP 5
+#define GL_QUADS 7
 #define GL_COLOR_BUFFER_BIT 0x00004000
 #define GL_VIEWPORT 0x0BA2
 #define GL_TEXTURE_2D 0x0DE1
@@ -66,6 +67,8 @@ typedef unsigned int GLhandleARB;
 #define GL_TEXTURE_WRAP_S 0x2802
 #define GL_TEXTURE_WRAP_T 0x2803
 #define GL_CLAMP_TO_EDGE 0x812F
+#define GL_MAJOR_VERSION 0x821B
+#define GL_MINOR_VERSION 0x821C
 #define GL_UNSIGNED_SHORT_5_6_5 0x8363
 #define GL_UNSIGNED_SHORT_5_6_5_REV 0x8364
 #define GL_FRAGMENT_SHADER 0x8B30
@@ -110,6 +113,14 @@ typedef void (GLAPIENTRYP PFNGLBINDVERTEXARRAYPROC)(GLuint array);
 GLAPI PFNGLBINDVERTEXARRAYPROC glBindVertexArray;
 typedef void (GLAPIENTRYP PFNGLDRAWARRAYSPROC)(GLenum mode, GLint first, GLsizei count);
 GLAPI PFNGLDRAWARRAYSPROC glDrawArrays;
+typedef void (GLAPIENTRYP PFNGLBEGINPROC)(GLenum mode);
+GLAPI PFNGLBEGINPROC glBegin;
+typedef void (GLAPIENTRYP PFNGLENDPROC)(void);
+GLAPI PFNGLENDPROC glEnd;
+typedef void (GLAPIENTRYP PFNGLVERTEX2FPROC)(GLfloat x, GLfloat y);
+GLAPI PFNGLVERTEX2FPROC glVertex2f;
+typedef void (GLAPIENTRYP PFNGLTEXCOORD2FPROC)(GLfloat s, GLfloat t);
+GLAPI PFNGLTEXCOORD2FPROC glTexCoord2f;
 
 #if GL_DEBUG
 typedef void (GLAPIENTRYP PFNGLENABLEPROC)(GLenum cap);
@@ -127,34 +138,38 @@ GLAPI PFNGLDEBUGMESSAGECALLBACKPROC glDebugMessageCallback;
 
 static int LoadGL(void)
 {
-   #define LOAD_PROC(type, name) \
+   #define LOAD_PROC(req, type, name) \
       name = (type) SDL_GL_GetProcAddress(#name); \
-      if (!name) { Out_Error("can not load OpenGL function '%s'", #name); return 0; }
-   LOAD_PROC(PFNGLCLEARPROC,                glClear);
-   LOAD_PROC(PFNGLVIEWPORTPROC,             glViewport);
-   LOAD_PROC(PFNGLGENTEXTURESPROC,          glGenTextures);
-   LOAD_PROC(PFNGLBINDTEXTUREPROC,          glBindTexture);
-   LOAD_PROC(PFNGLTEXPARAMETERIPROC,        glTexParameteri);
-   LOAD_PROC(PFNGLTEXIMAGE2DPROC,           glTexImage2D);
-   LOAD_PROC(PFNGLGETINTEGERVPROC,          glGetIntegerv);
-   LOAD_PROC(PFNGLCREATEPROGRAMPROC,        glCreateProgram);
-   LOAD_PROC(PFNGLCREATESHADERPROC,         glCreateShader);
-   LOAD_PROC(PFNGLSHADERSOURCEPROC,         glShaderSource);
-   LOAD_PROC(PFNGLCOMPILESHADERPROC,        glCompileShader);
-   LOAD_PROC(PFNGLATTACHSHADERPROC,         glAttachShader);
-   LOAD_PROC(PFNGLLINKPROGRAMPROC,          glLinkProgram);
-   LOAD_PROC(PFNGLUSEPROGRAMPROC,           glUseProgram);
-   LOAD_PROC(PFNGLGETUNIFORMLOCATIONPROC,   glGetUniformLocation);
-   LOAD_PROC(PFNGLUNIFORM2FPROC,            glUniform2f);
-   LOAD_PROC(PFNGLGENVERTEXARRAYSPROC,      glGenVertexArrays);
-   LOAD_PROC(PFNGLBINDVERTEXARRAYPROC,      glBindVertexArray);
-   LOAD_PROC(PFNGLDRAWARRAYSPROC,           glDrawArrays);
+      if (!name && req) { Out_Error("can not load OpenGL function '%s'", #name); return 0; }
+   LOAD_PROC(1, PFNGLCLEARPROC,                glClear);
+   LOAD_PROC(1, PFNGLENABLEPROC,               glEnable);
+   LOAD_PROC(1, PFNGLVIEWPORTPROC,             glViewport);
+   LOAD_PROC(1, PFNGLGENTEXTURESPROC,          glGenTextures);
+   LOAD_PROC(1, PFNGLBINDTEXTUREPROC,          glBindTexture);
+   LOAD_PROC(1, PFNGLTEXPARAMETERIPROC,        glTexParameteri);
+   LOAD_PROC(1, PFNGLTEXIMAGE2DPROC,           glTexImage2D);
+   LOAD_PROC(1, PFNGLGETINTEGERVPROC,          glGetIntegerv);
+   LOAD_PROC(0, PFNGLCREATEPROGRAMPROC,        glCreateProgram);
+   LOAD_PROC(0, PFNGLCREATESHADERPROC,         glCreateShader);
+   LOAD_PROC(0, PFNGLSHADERSOURCEPROC,         glShaderSource);
+   LOAD_PROC(0, PFNGLCOMPILESHADERPROC,        glCompileShader);
+   LOAD_PROC(0, PFNGLATTACHSHADERPROC,         glAttachShader);
+   LOAD_PROC(0, PFNGLLINKPROGRAMPROC,          glLinkProgram);
+   LOAD_PROC(0, PFNGLUSEPROGRAMPROC,           glUseProgram);
+   LOAD_PROC(0, PFNGLGETUNIFORMLOCATIONPROC,   glGetUniformLocation);
+   LOAD_PROC(0, PFNGLUNIFORM2FPROC,            glUniform2f);
+   LOAD_PROC(0, PFNGLGENVERTEXARRAYSPROC,      glGenVertexArrays);
+   LOAD_PROC(0, PFNGLBINDVERTEXARRAYPROC,      glBindVertexArray);
+   LOAD_PROC(0, PFNGLDRAWARRAYSPROC,           glDrawArrays);
+   LOAD_PROC(0, PFNGLBEGINPROC,                glBegin);
+   LOAD_PROC(0, PFNGLENDPROC,                  glEnd);
+   LOAD_PROC(0, PFNGLVERTEX2FPROC,             glVertex2f);
+   LOAD_PROC(0, PFNGLTEXCOORD2FPROC,           glTexCoord2f);
 #if GL_DEBUG
-   LOAD_PROC(PFNGLENABLEPROC,               glEnable);
-   LOAD_PROC(PFNGLGETSHADERINFOLOGPROC,     glGetShaderInfoLog);
-   LOAD_PROC(PFNGLGETPROGRAMINFOLOGPROC,    glGetProgramInfoLog);
-   LOAD_PROC(PFNGLGETERRORPROC,             glGetError);
-   LOAD_PROC(PFNGLDEBUGMESSAGECALLBACKPROC, glDebugMessageCallback);
+   LOAD_PROC(0, PFNGLGETSHADERINFOLOGPROC,     glGetShaderInfoLog);
+   LOAD_PROC(0, PFNGLGETPROGRAMINFOLOGPROC,    glGetProgramInfoLog);
+   LOAD_PROC(0, PFNGLGETERRORPROC,             glGetError);
+   LOAD_PROC(0, PFNGLDEBUGMESSAGECALLBACKPROC, glDebugMessageCallback);
 #endif
    return 1;
 }
@@ -168,7 +183,9 @@ static void SDLdrv_UpdateViewport(MEM_ZONE_SDL *drv, INT vpWidth, INT vpHeight)
    if (w > vpWidth) {
       w = vpWidth;  h = vpWidth / ASPECT_RATIO;
    }
-   glUniform2f(drv->Loc_uSize, w / vpWidth, -h / vpHeight);
+   drv->VP_Width  =  w / vpWidth;
+   drv->VP_Height = -h / vpHeight;
+   glUniform2f(drv->Loc_uSize, drv->VP_Width, drv->VP_Height);
 }
 
 #if GL_DEBUG
@@ -192,90 +209,103 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
       return 0;
    }
 
-   if (FullScreen) { SDL_ShowCursor(SDL_DISABLE); }
-
-   SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, SDL_TRUE);
-   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,  SDL_GL_CONTEXT_PROFILE_CORE);
-
    drv->The_Context = SDL_GL_CreateContext(drv->The_Window);
    if (!drv->The_Context) {
       DEBUG(Out_Message("SDL_GL_CreateContext() failed: %s", SDL_GetError()));
       return 0;
    }
 
+   if (FullScreen) { SDL_ShowCursor(SDL_DISABLE); }
    SDL_GL_MakeCurrent(drv->The_Window, drv->The_Context);
    SDL_GL_SetSwapInterval(1);
 
    if (!LoadGL()) { return 0; }
-#if GL_DEBUG
-   glDebugMessageCallback(myGLdebugProc, NULL);
-   glEnable(GL_DEBUG_OUTPUT);
-#endif
 
-   GLuint vao;  // it's nonsense, but we *have* to do it; some drivers insist
-   glGenVertexArrays(1, &vao);
-   glBindVertexArray(vao);
+   GLint v;
+   v = 0;  glGetIntegerv(GL_MAJOR_VERSION, &v);
+   drv->GL_Version = v * 10;
+   v = 0;  glGetIntegerv(GL_MINOR_VERSION, &v);
+   drv->GL_Version += (v >= 10) ? 9 : v;
+   DEBUG(Out_Message("OpenGL version seems to be %d.%d", drv->GL_Version / 10, drv->GL_Version % 10));
+
+#if GL_DEBUG
+   if (drv->GL_Version >= 42) {
+      glDebugMessageCallback(myGLdebugProc, NULL);
+      glEnable(GL_DEBUG_OUTPUT);
+   }
+#endif
 
    glGenTextures(1, &drv->The_Texture);
    glBindTexture(GL_TEXTURE_2D, drv->The_Texture);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   GLuint filter = (drv->GL_Version >= 33) ? GL_LINEAR : GL_NEAREST;
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-   drv->The_Shader = glCreateProgram();
+   if (drv->GL_Version >= 33) {
+      DEBUG(Out_Message("using OpenGL 3.3+ shader-based pipeline"));
 
-   GLuint vs = glCreateShader(GL_VERTEX_SHADER);
-   static const char* vsSrc =
-         "#version 330"
-   "\n"  "uniform vec2 uSize;"
-   "\n"  "out vec2 vTexCoord;"
-   "\n"  "void main() {"
-   "\n"  "  vec2 p = vec2(((gl_VertexID & 2) != 0) ? 1. : 0., ((gl_VertexID & 1) != 0) ? 1. : 0.);"
-   "\n"  "  gl_Position = vec4((p * vec2(2.) - vec2(1.)) * uSize, 0., 1.);"
-   "\n"  "  vTexCoord = p;"
-   "\n"  "}";
-   glShaderSource(vs, 1, &vsSrc, NULL);
-   glCompileShader(vs);
-   glAttachShader(drv->The_Shader, vs);
+      GLuint vao;  // it's nonsense, but we *have* to do it; some drivers insist
+      glGenVertexArrays(1, &vao);
+      glBindVertexArray(vao);
+
+      drv->The_Shader = glCreateProgram();
+
+      GLuint vs = glCreateShader(GL_VERTEX_SHADER);
+      static const char* vsSrc =
+            "#version 330"
+      "\n"  "uniform vec2 uSize;"
+      "\n"  "out vec2 vTexCoord;"
+      "\n"  "void main() {"
+      "\n"  "  vec2 p = vec2(((gl_VertexID & 2) != 0) ? 1. : 0., ((gl_VertexID & 1) != 0) ? 1. : 0.);"
+      "\n"  "  gl_Position = vec4((p * vec2(2.) - vec2(1.)) * uSize, 0., 1.);"
+      "\n"  "  vTexCoord = p;"
+      "\n"  "}";
+      glShaderSource(vs, 1, &vsSrc, NULL);
+      glCompileShader(vs);
+      glAttachShader(drv->The_Shader, vs);
 #if GL_DEBUG
-   char log[1024];
-   glGetShaderInfoLog(vs, 1024, NULL, log);
-   DEBUG(Out_Message("VS compile log:\n%s", log));
+      char log[1024];
+      glGetShaderInfoLog(vs, 1024, NULL, log);
+      DEBUG(Out_Message("VS compile log:\n%s", log));
 #endif
 
-   GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
-   static const char* fsSrc =
-         "#version 330"
-   "\n"  "in vec2 vTexCoord;"
-   "\n"  "uniform vec2 uTexSize;"
-   "\n"  "uniform sampler2D uTex;"
-   "\n"  "layout(location=0) out vec4 oColor;"
-   "\n"  "void main() {"
-   "\n"  "  vec2 p = vTexCoord * uTexSize;"
-   "\n"  "  vec2 i = floor(p + vec2(.5));"
-   "\n"  "  p = clamp((p - i) / fwidth(p), -.5, .5) + i;"
-   "\n"  "  oColor = texture(uTex, p / uTexSize);"
-   "\n"  "}";
-   glShaderSource(fs, 1, &fsSrc, NULL);
-   glCompileShader(fs);
-   glAttachShader(drv->The_Shader, fs);
+      GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
+      static const char* fsSrc =
+            "#version 330"
+      "\n"  "in vec2 vTexCoord;"
+      "\n"  "uniform vec2 uTexSize;"
+      "\n"  "uniform sampler2D uTex;"
+      "\n"  "layout(location=0) out vec4 oColor;"
+      "\n"  "void main() {"
+      "\n"  "  vec2 p = vTexCoord * uTexSize;"
+      "\n"  "  vec2 i = floor(p + vec2(.5));"
+      "\n"  "  p = clamp((p - i) / fwidth(p), -.5, .5) + i;"
+      "\n"  "  oColor = texture(uTex, p / uTexSize);"
+      "\n"  "}";
+      glShaderSource(fs, 1, &fsSrc, NULL);
+      glCompileShader(fs);
+      glAttachShader(drv->The_Shader, fs);
 #if GL_DEBUG
-   glGetShaderInfoLog(fs, 1024, NULL, log);
-   DEBUG(Out_Message("FS compile log:\n%s", log));
+      glGetShaderInfoLog(fs, 1024, NULL, log);
+      DEBUG(Out_Message("FS compile log:\n%s", log));
 #endif
 
-   glLinkProgram(drv->The_Shader);
+      glLinkProgram(drv->The_Shader);
 #if GL_DEBUG
-   glGetProgramInfoLog(drv->The_Shader, 1024, NULL, log);
-   DEBUG(Out_Message("program link log:\n%s", log));
+      glGetProgramInfoLog(drv->The_Shader, 1024, NULL, log);
+      DEBUG(Out_Message("program link log:\n%s", log));
 #endif
-   glUseProgram(drv->The_Shader);
+      glUseProgram(drv->The_Shader);
 
-   drv->Loc_uSize = glGetUniformLocation(drv->The_Shader, "uSize");
-   glUniform2f(glGetUniformLocation(drv->The_Shader, "uTexSize"), drv->Display_Width, drv->Display_Height);
+      drv->Loc_uSize = glGetUniformLocation(drv->The_Shader, "uSize");
+      glUniform2f(glGetUniformLocation(drv->The_Shader, "uTexSize"), drv->Display_Width, drv->Display_Height);
+   }
+   else
+   {
+      DEBUG(Out_Message("using OpenGL 1.1 fixed-function pipeline"));
+   }
 
    GLint vp[4];
    glGetIntegerv(GL_VIEWPORT, vp);
@@ -297,7 +327,20 @@ static void SDLdrv_ShowFrame(MEM_ZONE_SDL *drv)
    glBindTexture(GL_TEXTURE_2D, drv->The_Texture);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, drv->Display_Width, drv->Display_Height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, (const GLvoid*)drv->Screen_Buffer);
 
-   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+   if (drv->GL_Version >= 33)
+   {
+      glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+   }
+   else
+   {
+      glEnable(GL_TEXTURE_2D);
+      glBegin(GL_QUADS);
+         glTexCoord2f(0.f, 0.f);  glVertex2f(-drv->VP_Width, -drv->VP_Height);
+         glTexCoord2f(0.f, 1.f);  glVertex2f(-drv->VP_Width, +drv->VP_Height);
+         glTexCoord2f(1.f, 1.f);  glVertex2f(+drv->VP_Width, +drv->VP_Height);
+         glTexCoord2f(1.f, 0.f);  glVertex2f(+drv->VP_Width, -drv->VP_Height);
+      glEnd();
+   }
 
 #if GL_DEBUG
    GLenum err; do { err = glGetError(); if (err) { DEBUG(Out_Message("[Draw] GL error 0x%04X", err)); } } while (err);

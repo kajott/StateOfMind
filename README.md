@@ -11,8 +11,9 @@ to run on modern Windows or Linux systems.
 - builds with reasonably modern compilers
 - runs on reasonably modern operating systems
 - native 64-bit binary, no emulation
-- uses SDL 2.0 and OpenGL 3.3 for display and sound
+- uses SDL 2.0 and OpenGL for display and sound
 - "antialiased blocky" upscaling from 320x200 to desktop resolution
+  on OpenGL 3.3 and up
 
 ## Bugs
 
@@ -28,7 +29,6 @@ to run on modern Windows or Linux systems.
   by combining the demo's music file with the
   [source](https://soundcloud.com/senserband/states-of-mind)
   [material](https://www.youtube.com/watch?v=5mNVnr5BKsA)
-- have the renderer fall back to OpenGL 1.1 or 2.x if required (e.g. Raspberry Pi)
 - improve lyrics timing
 
 

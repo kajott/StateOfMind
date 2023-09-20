@@ -42,9 +42,12 @@ typedef struct {
    SDL_GLContext The_Context;
 
    /* OpenGL specific */
+   INT           GL_Version;
    UINT          The_Texture;
    UINT          The_Shader;
    INT           Loc_uSize;
+   FLT           VP_Width;
+   FLT           VP_Height;
 
 #pragma pack()
 } MEM_ZONE_SDL;
