@@ -194,12 +194,6 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
 
    if (FullScreen) { SDL_ShowCursor(SDL_DISABLE); }
 
-   SDL_GL_SetAttribute(SDL_GL_RED_SIZE,     8);
-   SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,   8);
-   SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,    8);
-   SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,   8);
-   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,   0);
-   SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 0);
    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, SDL_TRUE);
    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
