@@ -172,6 +172,7 @@ add_library (lib3d STATIC
 )
 target_include_directories (lib3d PUBLIC include)
 target_compile_definitions (lib3d PRIVATE UNIX)
+target_compile_definitions (lib3d PRIVATE _SKIP_OPTIM_MESH_)  # avoid mesh optimizer bugs
 
 ###############################################################################
 

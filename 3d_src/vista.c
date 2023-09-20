@@ -140,10 +140,17 @@ EXTERN VISTA *Load_Vista( STRING In_Name, WORLD *W )
    Mem_Clear( New );
    F_READ( &Head, In, sizeof( Head ) );
    New->Max_Polys = Indy_l( Head.Max_Polys );
-      //    soupape de securité!!
+      //    soupape de securitÃ©!!
       // Lors de l'insertion/removal du DELTA
       // on genere temporairement des ID supplementaires...
+#ifdef _SKIP_OPTIM_MESH_
+      // ... and it's going to be even more extra polygons
+      // if mesh optimization is disabled, so let's add
+      // even more safety
+   New->Max_Polys *= 20;
+#else
    New->Max_Polys *= 2;
+#endif
    New->Max_Polys += 20;  
 
    Cam_Id = Indy_s( Head.Camera_ID );
@@ -256,14 +263,35 @@ EXTERN void Sort_Vista_Polys( OBJ_NODE *Root )
 Init:
       if ( Cur_Chunk->Type == VISTA_INIT )
       {
+#ifdef _SKIP_OPTIM_MESH_
+         // no optimized meshes used -> face IDs in the .vst file are
+         // no longer correct -> don't use them; always consider all polygons
+         INT obj, poly;
+         Nb_Poly_Sorted = 0;
+         for ( obj = 0;  obj < _RCst_.The_World->Max_Obj;  ++obj )
+         {
+            Cur_Node = _RCst_.The_World->Node_Ptr[obj];
+            if (!Cur_Node || (Cur_Node->Type != MESH_TYPE))
+               continue;
+            Cur_Msh = (MESH*)Cur_Node->Data;
+            for (poly = 0;  poly < Cur_Msh->Nb_Polys;  ++poly)
+            {
+               Cur_Vista->Poly_ID[Nb_Poly_Sorted] = poly;
+               Cur_Vista->Obj_ID[Nb_Poly_Sorted] = obj;
+               Nb_Poly_Sorted++;
+            }
+         }
+         Cur_Vista->Cur_Nb = Nb_Poly_Sorted;
+#else
          memcpy( Cur_Vista->Poly_ID, Cur_Chunk->Poly_ID, Cur_Chunk->Nb_Polys*sizeof( USHORT ) );
          memcpy( Cur_Vista->Obj_ID, Cur_Chunk->Obj_ID, Cur_Chunk->Nb_Polys*sizeof( USHORT ) );
          Nb_Poly_Sorted = Cur_Vista->Cur_Nb = Cur_Chunk->Nb_Polys;
-
+#endif
 //         fprintf( stderr, "[t=%.2f. \t[INIT]. %d polys]\n", _RCst_.The_World->Time, Cur_Chunk->Nb_Polys );
       }
       else  // if ( Cur_Chunk->Type == VISTA_DELTA )
       {
+#ifndef _SKIP_OPTIM_MESH_
          INT i, j, Min;
 
             // to perform insertion/removal without to many searches,
@@ -326,6 +354,7 @@ Insert:
             }
 //            Print_Vista_State( Cur_Chunk );
          }
+#endif  // _SKIP_OPTIM_MESH_
 //         fprintf( stderr, "[t=%.2f. \t[DELTA]. %d/%d polys]\n", _RCst_.The_World->Time, Cur_Chunk->Nb_Polys, Cur_Vista->Cur_Nb );
 //         for( i=0; i<=Cur_Vista->Cur_Nb; ++i )
 //            fprintf( stderr, "0x%x/%x  ", Cur_Vista->Obj_ID[i], Cur_Vista->Poly_ID[i] );
