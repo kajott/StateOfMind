@@ -411,7 +411,7 @@ Ok:
 
       if ( !No_Sound ) MP3_More( MP3_Strm, Timer, Nb_Frames );
       if ( Advance_Timer( ) == -1 ) break;
-      Do_Flush();ZONE_FLUSH( The_Screen );
+      Do_Flush();  // ZONE_FLUSH( The_Screen );
 
 #ifdef ECHO_TIMER
       {
