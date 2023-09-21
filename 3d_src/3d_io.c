@@ -1523,7 +1523,7 @@ static struct {
    { CHK_VOFFSET,     V_Offset_Rd },
    { CHK_UV_ROT,      UV_Rot_Rd },
 //   { CHK_MESHVRSN,   Mesh_Version_Rd },
-#endif _SKIP_MISC_
+#endif   // _SKIP_MISC_
 
    { CHK_MAIN,        NULL },
    { CHK_OBJMESH,     NULL },

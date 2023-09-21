@@ -49,9 +49,8 @@ EXTERN INLINE void Drv_Black_Pal( COLOR_ENTRY *Pal, INT I )
    if ( I<=0 ) I=256;
    for( i=0; i<I; ++i )
    {
-      Pal[0][RED_F] = Pal[0][GREEN_F] = Pal[0][BLUE_F] = 0; 
-      Pal[0][INDEX_F] = (PIXEL)i;
-      Pal++;
+      Pal[i][RED_F] = Pal[i][GREEN_F] = Pal[i][BLUE_F] = 0; 
+      Pal[i][INDEX_F] = (PIXEL)i;
    }
 }
 

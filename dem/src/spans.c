@@ -26,7 +26,7 @@ static INT Max_Seg;
 
 /********************************************************************/
 
-static Free_Span_Chain( INT y )
+static void Free_Span_Chain( INT y )
 {
    SEG *Cur = SFirst[y];
    while( Cur->Next!=NULL ) Cur=Cur->Next;
@@ -83,7 +83,7 @@ static void Paint( FLT xi, FLT xf, INT y )
    for( ; i<0; ++i ) Dst[i] = 0xffff;
 }
 
-   // Flag: type (gauche/droite) de la moitié gauche
+   // Flag: type (gauche/droite) de la moitiÃ© gauche
    // SFlags: bit0->set=gauche/clr=droite   // bit1:set=filled spans
 
 static void Insert_Span( FLT xi, FLT xf, INT y, BYTE Flag )

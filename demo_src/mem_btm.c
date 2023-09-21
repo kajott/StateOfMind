@@ -98,7 +98,7 @@ EXTERN MEM_BITMAP *Align_MEM_BTM_64( MEM_BITMAP *Btm )
       /* one should always align textures *FIRST* (less junk) */
 
    if ( !( MEM_Flags(Btm) & IMG_OWNS_PTR ) ) return( Btm );
-   if ( ( (int)(Btm->Bits) & 0xFFFF ) == 0 ) return( Btm );
+   if ( ( (ADDR)(Btm->Bits) & 0xFFFF ) == 0 ) return( Btm );
 
    Size = MEM_Size(Btm);
    New_Bits = Bits = NULL;
