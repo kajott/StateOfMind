@@ -77,6 +77,8 @@ typedef unsigned int GLhandleARB;
 
 typedef void (GLAPIENTRYP PFNGLCLEARPROC)(GLbitfield mask);
 GLAPI PFNGLCLEARPROC glClear;
+typedef void (GLAPIENTRYP PFNGLENABLEPROC)(GLenum cap);
+GLAPI PFNGLENABLEPROC glEnable;
 typedef void (GLAPIENTRYP PFNGLVIEWPORTPROC)(GLint x, GLint y, GLsizei width, GLsizei height);
 GLAPI PFNGLVIEWPORTPROC glViewport;
 typedef void (GLAPIENTRYP PFNGLGENTEXTURESPROC)(GLsizei n, GLuint *textures);
@@ -123,8 +125,6 @@ typedef void (GLAPIENTRYP PFNGLTEXCOORD2FPROC)(GLfloat s, GLfloat t);
 GLAPI PFNGLTEXCOORD2FPROC glTexCoord2f;
 
 #if GL_DEBUG
-typedef void (GLAPIENTRYP PFNGLENABLEPROC)(GLenum cap);
-GLAPI PFNGLENABLEPROC glEnable;
 typedef void (GLAPIENTRYP PFNGLGETSHADERINFOLOGPROC)(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
 GLAPI PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
 typedef void (GLAPIENTRYP PFNGLGETPROGRAMINFOLOGPROC)(GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
