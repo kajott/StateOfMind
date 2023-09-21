@@ -185,7 +185,9 @@ static void SDLdrv_UpdateViewport(MEM_ZONE_SDL *drv, INT vpWidth, INT vpHeight)
    }
    drv->VP_Width  =  w / vpWidth;
    drv->VP_Height = -h / vpHeight;
-   glUniform2f(drv->Loc_uSize, drv->VP_Width, drv->VP_Height);
+   if (drv->GL_Version >= 33) {
+      glUniform2f(drv->Loc_uSize, drv->VP_Width, drv->VP_Height);
+   }
 }
 
 #if GL_DEBUG
@@ -229,6 +231,12 @@ static INT SDLdrv_Startup(MEM_ZONE_SDL *drv, INT width, INT height)
    DEBUG(Out_Message("OpenGL version seems to be %d.%d", drv->GL_Version / 10, drv->GL_Version % 10));
 
 #if GL_DEBUG
+   // ignore GL_INVALID_ENUM errors resulting from querying the OpenGL version
+   // on OpenGL < 3.0
+   while (glGetError());
+
+   // activate GL_DEBUG_OUTPUT on OpenGL >= 4.2 (this is the first version
+   // where this is guaranteed to be valid)
    if (drv->GL_Version >= 42) {
       glDebugMessageCallback(myGLdebugProc, NULL);
       glEnable(GL_DEBUG_OUTPUT);
