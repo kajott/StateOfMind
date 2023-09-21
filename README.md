@@ -1,10 +1,10 @@
 # Bomb! - State Of Mind (SDL port)
 
 This repository contains a source port of the classic (1998) demo
-[State Of Mind](https://www.pouet.net/prod.php?which=26) by French demogroup
-[Bomb!](https://demozoo.org/groups/127/).
+[State Of Mind](https://www.pouet.net/prod.php?which=26)
+by the French demogroup [Bomb!](https://demozoo.org/groups/127/).
 It is based on the source code that has been released in 2003, and is targeted
-to run on modern Windows or Linux systems.
+to run on modern desktop systems.
 
 ## Features
 
@@ -14,13 +14,15 @@ to run on modern Windows or Linux systems.
 - uses SDL 2.0 and OpenGL for display and sound
 - "antialiased blocky" upscaling from 320x200 to desktop resolution
   on OpenGL 3.3 and up
+- tested on
+  - Windows 10 (x64_64)
+  - Linux (Ubuntu 22.04, x64_64)
+  - Raspberry Pi 4 (64-bit Raspberry Pi OS)
 
 ## Bugs
 
 - some graphical glitches in the "liquid tunnel" scene near the end
-  (not too bad on x86/x86_64, but worse on some other architectures)
 - textures pop in a bit late in the canyon scene
-- music playback is broken on AArch64 (and possibly other archs too)
 
 ## TODOs
 
