@@ -13,6 +13,7 @@
 #include "audio.h"
 #include "mp3.h"
 #include "fonts.h"
+#include "drv_io.h"
 
 #if defined( USE_SDL ) || !defined( WIN32 )
 
@@ -37,6 +38,7 @@ typedef void *MEM_ZONE;
 
 #define DAT_FILE_NAME   "mind.dat" 
 #define MP3_FILE_NAME   "mind.mp3"
+#define HQ_MP3_FILE_NAME "mind_hq.mp3"
 
 int DoubleSize;
 INT _MP3_Out_;
@@ -338,6 +340,17 @@ int main( int argc, char **argv )
       n++;
    }
 
+   if (!MP3_File)
+   {
+      FILE* test = Access_File(HQ_MP3_FILE_NAME, READ_SWITCH);
+      if (test)
+      {
+         MP3_File = HQ_MP3_FILE_NAME;
+         DEBUG(Out_Message("using high-quality MP3 file"));
+         F_CLOSE(test);
+      }
+   }
+
 #ifdef BUILD_DAT_FILE
    USE_DAT_FILE( DAT_FILE_NAME, Write_Dat );
 #else
@@ -380,6 +393,7 @@ int main( int argc, char **argv )
 #endif
       exit( 1 );
    }
+   DEBUG(Out_Message("MP3 stream is %d Hz, %d channel(s)", MP3_Strm->FS, MP3_Strm->In_Channels));
 
 Ok:
    Close_Dat_File( );   // not needed anymore

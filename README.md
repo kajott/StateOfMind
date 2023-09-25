@@ -90,6 +90,11 @@ audio and video: The video timer is started at the beginning, and immediately
 after that, audio playback starts, and nobody ever looks at its progress after
 that.
 
+### I ran the "generate HQ soundtrack" script successfully, how can I make the demo use the result now?
+
+You don't need to do anything special. If `mind_hq.mp3` exists, the demo will
+pick it up automatically.
+
 
 ## Build Instructions
 
