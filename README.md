@@ -18,6 +18,13 @@ to run on modern desktop systems.
   - Windows 10 (x64_64)
   - Linux (Ubuntu 22.04, x64_64)
   - Raspberry Pi 4 (64-bit Raspberry Pi OS)
+- comes with a Python script that creates a high-quality (48 kHz stereo instead
+  of 32 kHz mono) soundtrack by combining the demo's music file with the
+  [source](https://soundcloud.com/senserband/states-of-mind)
+  [material](https://www.youtube.com/watch?v=5mNVnr5BKsA)
+  - this requires [FFmpeg](http://ffmpeg.org) and a recent(!) version of
+    [yt-dlp](https://github.com/yt-dlp/yt-dlp) to work
+
 
 ## Bugs
 
@@ -27,11 +34,6 @@ to run on modern desktop systems.
 ## TODOs
 
 - fix the bugs
-- create a high-quality (44.1 or 48 kHz stereo instead of 32 kHz mono) soundtrack
-  by combining the demo's music file with the
-  [source](https://soundcloud.com/senserband/states-of-mind)
-  [material](https://www.youtube.com/watch?v=5mNVnr5BKsA)
-- improve lyrics timing
 
 
 ## FAQs
