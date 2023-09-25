@@ -70,7 +70,8 @@ EXTERN WLT_STREAM *Load_Wavelet_Stream( STRING Name )
 {
    WLT_STREAM *Strm;
    FILE *In;
-   INT SizeX, SizeY, Nb_Frames, Nb_Col, Version;
+   INT SizeX, SizeY, Nb_Frames, Nb_Col;
+   FLT Version;
    INT i;
 
    In = Access_File( Name, READ_SWITCH );

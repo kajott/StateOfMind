@@ -157,7 +157,7 @@ EXTERN void Draw_Spans_I( VBUFFER *V )
       fprintf( stderr, "y=%d : ", y );
       while( Cur->Next!=NULL )
       {
-         fprintf( stderr, "[%d,%d] ", Cur->xi, Cur->xf );
+         fprintf( stderr, "[%g,%g] ", Cur->xi, Cur->xf );
          Cur = Cur->Next;
       }
       fprintf( stderr, "\n" );
