@@ -63,6 +63,7 @@ their source code is included in the 2003 source code release.
 That plain C code is what this port is based on. My contributions were to:
 - create a CMake-based build system instead of the old Makefile contraptions
 - make the code believe it's running on a generic Unix machine
+  (so it's not using any 32-bit x86 assembly any longer)
 - make the code believe that said Unix machines are little-endian
   (as all relevant CPU architectures today are)
 - implement a display output driver based on SDL and OpenGL

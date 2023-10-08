@@ -1,6 +1,7 @@
 build*
 SDL2-2.*
 SDL2.dll
+mind_v12.zip
 mind.dat
 mind_dat.unpacked
 mind*.exe
