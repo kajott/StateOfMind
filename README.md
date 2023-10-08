@@ -108,7 +108,10 @@ all prerequisited can be installed with
 Building is then done with
 
     cmake -S. -Dbuild -DCMAKE_BUILD_TYPE=Release
-    cmake --build build
+    cmake --build build --config Release
+
+This, along with generating a release archive (`mind_v13.zip`),
+can also be done by running the Python script `util/make_release.py`.
 
 The binary will be put into the project's base directory, not the usual
 CMake build subdirectory.
