@@ -84,6 +84,8 @@ static INT Emit_Block_I( INT Size )
             Blk.Ptr++;
          }
       break;
+
+      default: break;
    }
    return( Size );
 }
@@ -111,6 +113,8 @@ static INT Emit_Block_II( INT Size )   // BLOCK/FILL only
          Size += Blk.Size;
       }
       break;
+
+      default: break;
    }
    return( Size );
 }
@@ -146,6 +150,8 @@ static INT Emit_Block_III( INT Size )  // BLOCK/FILL/SKIP only
          Size += Blk.Size;
       }
       break;
+
+      default: break;
    }
    return( Size );
 }

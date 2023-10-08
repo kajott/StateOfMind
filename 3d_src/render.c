@@ -95,6 +95,7 @@ EXTERN RENDERER *Install_Renderer( RENDERER *What, ... )
             Format = va_arg( Arg_List, INT );
          break;
          case RENDER_CHECK_BUFFERS: Check_Buf = TRUE; break;
+         default: break;
       }
    }
    va_end( Arg_List );

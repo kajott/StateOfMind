@@ -135,7 +135,7 @@ static FLT BSP_Evaluate_Split( BSP_NODE *Cur, INT Plane, FLT Alpha )
       }
    }
 
-   Value = fabs( Right_Polys-Left_Polys ) + Cross_Polys;
+   Value = abs( Right_Polys-Left_Polys ) + Cross_Polys;
 
    printf( "Node ID %d -> Alpha=%f Left=%d Cross=%d Right=%d\n", Cur->ID, Alpha, Left, Cross, Right );
    printf( "    Left_Polys=%d Cross_Polys=%d Right_Polys=%d\n", Left_Polys, Cross_Polys, Right_Polys );

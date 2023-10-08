@@ -40,6 +40,7 @@ EXTERN BSP_NODE *BSP_New_Node( BSP_TREE *Tree )
 
 extern BSP_NODE *BSP_Dispose_Node( BSP_TREE *Tree )
 {
+   return NULL;
 }
 
 /******************************************************************/

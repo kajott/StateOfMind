@@ -15,6 +15,7 @@ EXTERN BSP_TREE *BSP_Tree = NULL;
 
 static INT BSP_Recurse( USHORT Node, BSP_LEAF **Where )
 {
+   return 0;
 }
 
 EXTERN INT BSP_Classify_Point( USHORT Node, 

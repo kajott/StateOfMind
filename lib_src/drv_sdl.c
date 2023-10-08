@@ -12,8 +12,11 @@
 #include "mem_map.h"
 #include "driver.h"
 
-//#define GL_DEBUG 1
-#define GL_DEBUG !defined(NDEBUG)
+#ifdef NDEBUG
+   #define GL_DEBUG 0
+#else
+   #define GL_DEBUG 1
+#endif
 
 const float ASPECT_RATIO = 320.f / 200.f;
 #define DEFAULT_WINDOW_SIZE 1280,800
