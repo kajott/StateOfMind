@@ -81,11 +81,7 @@ typedef enum {
    STRING Name;         \
 
 struct OBJECT {     // Abstract struct
-#pragma pack(1)
-
    OBJECT_FIELDS
-
-#pragma pack()
 };
 
 /******************************************************************/

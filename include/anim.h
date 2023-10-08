@@ -11,25 +11,17 @@
 /******************************************************************/
 
 typedef struct {
-#pragma pack(1)
-
    FLT Frame;
    FLT Tens, Cont, Bias;    /* tension, continuity, bias */
    FLT Ease_In, Ease_Out;
    FLT Values[4];          // Max size: 4*sizeof(FLT) 
    FLT Left[4], Right[4];  /* Position & left/right tangents */
-
-#pragma pack()
 } A_KEY;
 
 typedef struct {
-#pragma pack(1)
-
    INT Flags; 
    INT Nb_Keys, Data_Size, Cache;
    A_KEY *Keys;
-
-#pragma pack()
 } SPLINE_3DS;
 
 #define TRACK_NO_FLAG 0x0000

@@ -15,8 +15,6 @@
 /******************************************************************/
 
 typedef struct {
-#pragma pack(1)
-
    STRING Name;
    INT  (*Ping)( );
    INT  (*Init)( INT, INT );
@@ -25,8 +23,6 @@ typedef struct {
    INT  (*Flush)( BYTE *, INT );
    void (*Flush_Force)( BYTE *, INT );
    USHORT Flags;
-
-#pragma pack()
 } AUDIO_DRIVER;
 
 /******************************************************************/

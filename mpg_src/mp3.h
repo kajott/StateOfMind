@@ -31,8 +31,6 @@ extern FLT MP3_Out_Scale;
 /******************************************************************/
 
 typedef struct {
-#pragma pack(1)
-
    BYTE ID;
    BYTE Layer;
    BYTE Protection_Bit;
@@ -45,14 +43,10 @@ typedef struct {
    BYTE Copyright;
    BYTE Original;
    BYTE Emphasis;
-
-#pragma pack()
 } MP3_HEADER;
 
 typedef struct
 {
-#pragma pack(1)
-
    USHORT Main_Data_Begin;
    USHORT scfsi[2][4];
    USHORT Part2_3_Len[2][2];
@@ -71,16 +65,12 @@ typedef struct
    USHORT Count1_Table_Select[2][2];
 
    USHORT Block[2][2];     // 0:long, 1:short, 2:mixed      (3:weird?)
-
-#pragma pack()
 }  MP3_INFO;
                                                 
 
 #define MP3_BUF_SIZE (2560)      // Theoretically: max=1152*2...
 
 typedef struct {
-#pragma pack(1)
-
       // public. Same as in /include/mp3.h
    INT Freq, Bits_Per_Sample;
    INT In_Channels, Out_Channels;
@@ -94,8 +84,6 @@ typedef struct {
    MP3_INFO Info;
    BYTE MP3_Buffer[MP3_BUF_SIZE];
    BYTE *MP3_Buf;
-
-#pragma pack()
 } MP3_STRM;
 
 /******************************************************************/
@@ -165,15 +153,11 @@ extern FLT MP3_Change_Rate;
 #ifdef MP3_USE_SAMPLES
 
 typedef struct {
-#pragma pack(1)
-
    INT Frame_Offset;
    INT Len;
    INT Final_Len;
    SHORT Nb_Frames;
    SHORT Slot;
-
-#pragma pack()
 } MP3_SAMPLE;
 
 #define MP3_MAX_SAMPLES  16       // max samples

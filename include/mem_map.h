@@ -60,30 +60,20 @@ typedef enum {
 #include "masks.h"
 
 typedef struct {
-#pragma pack(1)
-
    INT X, Y, Width, Height;
-
-#pragma pack()
 } BACKUP_HEADER;
 
 struct MEM_ZONE_METHODS
 {
-#pragma pack(1)
-
    INT (*Propagate)( MEM_ZONE *, INT, INT, INT, INT );
    INT (*Flush)( MEM_ZONE * );
    void (*Destroy)( MEM_ZONE * );
    PIXEL *(*Get_Scanline)( MEM_ZONE *, INT );
    ZONE_CLIP_TYPE (*Set_Position)( MEM_ZONE *, INT, INT, INT );
-
-#pragma pack()
 };
 
 struct MEM_IMG
 {
-#pragma pack(1)
-
    INT Flags;
    INT Width, Height;
    INT Pad;
@@ -91,8 +81,6 @@ struct MEM_IMG
    INT Quantum;
    FORMAT Format;
    PIXEL *Base_Ptr;
-
-#pragma pack()
 };
 
 #define MEM_ZONE_FIELDS          \
@@ -107,11 +95,7 @@ struct MEM_IMG
 
 struct MEM_ZONE
 {
-#pragma pack(1)
-
    MEM_ZONE_FIELDS
-
-#pragma pack()
 };
 
 /********************************************************/

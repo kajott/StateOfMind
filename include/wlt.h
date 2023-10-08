@@ -22,7 +22,6 @@
 /*******************************************************/
 
 typedef struct {
-#pragma pack(1)
    INT BufX, BufY, SizeX, SizeY;
    INT Nb_Frames;
    USHORT **RLE;
@@ -30,7 +29,6 @@ typedef struct {
    USHORT *Frame;
    INT Nb_Col;
    PIXEL CMap[768]; 
-#pragma pack()
 } WLT_STREAM;
 
    // in wlt_strm.c

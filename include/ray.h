@@ -10,12 +10,9 @@
 
    // used in ray-tracing
 struct POLY_RAYTRACE_CST {
-#pragma pack(1)
-
    FLT U2, V2, UV;
    FLT xo, yo;
    VECTOR PoP1, PoP2;
-#pragma pack()
 } ;
 
 #define SET_FCOLOR(C,R,G,B,A)   { (C)[0]=(R); (C)[1]=(G); \
@@ -41,8 +38,6 @@ extern INT Compute_Raytrace_Poly_Constants( OBJ_NODE *Node );
       // info about the raytracer
 
 typedef struct {
-#pragma pack(1)
-
    BYTE Do_Light, Do_Radiosity;
    BYTE Do_UV_Antialias;
    OBJ_NODE *Light_Node;
@@ -54,7 +49,6 @@ typedef struct {
    FLT Light_Fall;
    UINT Filter_Flags;
    UINT Backface_Cull;
-#pragma pack()
 } RAYTRACER_INFO;
 
 extern RAYTRACER_INFO Ray_Info;
@@ -68,8 +62,6 @@ extern RAYTRACER_INFO *Init_Raytracer( );
 #define RAY_HAS_COLOR  0x0008
 
 struct RAY {
-#pragma pack(1)
-
    VECTOR Orig;      //  3
    VECTOR Dir;       // +3
    FCOLOR Col;       // +4
@@ -84,7 +76,6 @@ struct RAY {
    VECTOR Normal;
    OBJ_NODE *Node;
    FLT    x, y;      // for mapping
-#pragma pack()
 };
 
 #define _RAY_HUGE_    (1.0e10f)
@@ -127,19 +118,13 @@ extern INT Compute_Reflected_Color( RAY *Ray, FCOLOR Result );
 /******************************************************************/
 
 struct SLAB {
-#pragma pack(1)
-
    VECTOR N;
    FLT d;
-#pragma pack()
 };
 
 struct SLABS {
-#pragma pack(1)
-
    INT Nb;
    SLAB *Slabs;
-#pragma pack()
 };
 
 #define _SLAB_EPSILON_ (1.0e-6f)
@@ -169,8 +154,6 @@ extern INT Compute_Light_Diffuse( RAY *Ray, FCOLOR Light_Col );
    // in rmat.c
 
 struct RAY_MATERIAL {
-#pragma pack(1)
-
    MATERIAL *Source;
    FLT Uo_Mip, Vo_Mip;
    FLT Mip_Scale;
@@ -182,7 +165,6 @@ struct RAY_MATERIAL {
 
    FLT R, T, IOR;
    FCOLOR Ambient, Diffuse, Specular;
-#pragma pack()
 };
 
 
@@ -212,37 +194,26 @@ typedef struct OCTREE OCTREE;
 typedef struct OCTREE_DUMMY_DATA OCTREE_DUMMY_DATA;
 
 struct OCTREE_DUMMY_DATA {
-#pragma pack(1)
-
    OCTREE_DUMMY_DATA *Next;
-#pragma pack()
 };
 
 /******************************************************************/
 
 struct OCTREE_ID {
-#pragma pack(1)
-
    INT x,y,z;
    INT Size;
-#pragma pack()
 };
 
 struct OCTREE_NODE {
-#pragma pack(1)
-
    OCTREE_ID Id;
    OCTREE_DUMMY_DATA *Data;
    OCTREE_NODE *Children[8];
-#pragma pack()
 };
 
 /******************************************************************/
 
       // struct to gather info about 
 struct  OCTREE {
-#pragma pack(1)
-
    OCTREE_NODE *Root;
    VECTOR Center, Scale;
    OCTREE_NODE *Last_Hit;
@@ -252,7 +223,6 @@ struct  OCTREE {
    INT Data_Size;          // sizeof( OCTREE_DATA )
    void *(*Init_Data_Block)( );
    void (*Destroy_Data_Block)(void *);
-#pragma pack()
 };
 
 /******************************************************************/
@@ -283,8 +253,6 @@ extern INT Octree_Traverse( OCTREE_NODE *Node,
  ******************************************************************/
 
 struct OCTREE_DATA {
-#pragma pack(1)
-
    OCTREE_DATA *Next;
    INT Bounce_Level;
    VECTOR Pt, N;
@@ -292,12 +260,9 @@ struct OCTREE_DATA {
    FLT drdx, dgdx, dbdx,  drdy, dgdy, dbdy,  drdz, dgdz, dbdz;
    FLT  Harmonic_Mean_Distance, Nearest_Distance;
    VECTOR To_Nearest_Surface;
-#pragma pack()
 };
 
 typedef struct {
-#pragma pack(1)
-
    OCTREE *Octree;
    WORLD *World;
 
@@ -307,7 +272,6 @@ typedef struct {
    FLT Gray_Level, Brightness;
    INT Max_Radiosity_Level, Cur_Radiosity_Level;
    BYTE Show_Rad_Smp;
-#pragma pack()
 } RAD_INFO;
 
       // specific calls for radiosity...
@@ -329,13 +293,10 @@ extern INT Close_Radiosity( );
       // in sh_ray
 
 typedef struct {
-#pragma pack(1)
-
    USHORT U, V;
    USHORT Z;
    SHORT Nx, Ny, Nz;
    USHORT Node_Id, P_Id;
-#pragma pack()
 } RAY_CELL;
 
 extern SHADER_METHODS Ray_Shader;

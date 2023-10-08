@@ -16,7 +16,6 @@ typedef struct VISTA_CHUNK VISTA_CHUNK;
 
 struct VISTA_CHUNK
 {
-#pragma pack(1)
    FLT Time;
    INT Type;   // DELTA or INIT
    FLT Z_Min, Z_Max;
@@ -24,12 +23,10 @@ struct VISTA_CHUNK
    VISTA_CHUNK *Next;
    USHORT *Obj_ID;
    USHORT *Poly_ID;
-#pragma pack()
 };
 
 typedef struct 
 {
-#pragma pack(1)
    INT Max_Polys, Cur_Nb;      // max visible polys
    INT Nb_Chunks;
    VISTA_CHUNK *Chunks;
@@ -39,7 +36,6 @@ typedef struct
    USHORT *Obj_ID;
    OBJ_NODE *Camera;
    FLT Lens, Clip;
-#pragma pack()
 } VISTA;
 
 

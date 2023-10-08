@@ -9,24 +9,16 @@
 /******************************************************************/
 
 typedef struct {
-#pragma pack(1)
-
    INT Nb_Obj, Nb_Nodes;
    INT Nb_Polys, Nb_Vertex, Nb_Edges;
 // INT Nb_Mat, Nb_Txt;
-
-#pragma pack()
 } WORLD_RSC;
 
 typedef struct {         // keeps count of allocated resources
-#pragma pack(1)
-
    INT Sorted_Sz, Poly_Keys_Sz; 
    INT Obj_To_Sort_Sz;
    INT Vertex_Sz, Poly_To_Sort_Sz;
    INT P_Vertex_Sz, Vertex_State_Sz;
-
-#pragma pack()
 } WORLD_REAL_RSC;
 
    // in wrld_rsc.c
@@ -46,8 +38,6 @@ extern UINT      *Sorted;
 /******************************************************************/
 
 struct WORLD {
-#pragma pack(1)
-
    OBJ_NODE *Root;
    OBJ_NODE **Node_Ptr;
 
@@ -69,8 +59,6 @@ struct WORLD {
 
    void *Octree;
    void *Bsp;
-
-#pragma pack()
 };
 
 /******************************************************************/

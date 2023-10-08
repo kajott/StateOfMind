@@ -28,8 +28,6 @@ extern long My_getitimer( );
 extern void My_closeitimer( );
 
 typedef struct {
-#pragma pack(1)
-
    long Timing;            // Sequence start
    long Length;            // sequence grouping for Tick_x value
    INT  Param;
@@ -41,8 +39,6 @@ typedef struct {
 
    INT Pos, Row;           // music position. Useless for MP3
    INT Precompute_Flag;    // useless 
-
-#pragma pack()
 } PHASE;
 
 extern long Timer;

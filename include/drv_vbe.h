@@ -81,6 +81,7 @@ typedef union {
     unsigned char cl, ch, ecx_b2, ecx_b3;
     unsigned char al, ah, eax_b2, eax_b3;
   } h;
+#pragma pack()
 } __dpmi_regs;
 
 #define DOS_CTRL_KEY    0x04
@@ -132,6 +133,7 @@ typedef struct {
   USHORT  OffScreenMemSize;
   BYTE   reserved[ 206 ];
 
+#pragma pack()
 } VBE_MODE;
 
 typedef struct {
@@ -148,6 +150,7 @@ typedef struct {
   void    *OemProductRevPtr;	/* 30 */
   BYTE    Reserved[ 222 ];
   BYTE    OemData[256];
+#pragma pack()
 } VBE_INFO;
 
 /********************************************************/
@@ -159,8 +162,6 @@ typedef struct {
 typedef struct MEM_ZONE_VBE MEM_ZONE_VBE;
 
 struct MEM_ZONE_VBE {
-#pragma pack(1)
-
    MEM_ZONE_DRIVER_FIELDS
 
       /* VBE specific */
@@ -179,7 +180,6 @@ struct MEM_ZONE_VBE {
    __dpmi_regs  SVGA_Regs;             /* 196 */
 
    CARD_METHODS *Video_Card;
-
 };
 
 

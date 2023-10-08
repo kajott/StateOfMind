@@ -11,12 +11,10 @@
 
 typedef struct 
 {
-#pragma pack(1)
    INT Uo, Vo;
    INT dU, dV;
    PIXEL *Bits;
    INT BpS;
-#pragma pack()
 } SPRITE;
 
 extern INT   Sp_Offsets0[ ];

@@ -9,18 +9,12 @@
 /******************************************************************/
 
 typedef struct {
-#pragma pack(1)
-
    FLT xp, yp, Inv_Z;  // 12
    F_MAPPING UV;       // 20
    VECTOR N;           // 32    // Store transformed normal, or else...
-
-#pragma pack()
 } P_VERTICE;
 
 typedef struct {
-#pragma pack(1)
-
    VECTOR N;         // 12
    POLY *Poly_Orig;  // 16
    FLT  Key;         // 20
@@ -28,13 +22,9 @@ typedef struct {
 //   void *Txt;        // 16    // pointer to TEXTURE, or to POLY, or...
 //   USHORT C;         // 22
 //   USHORT UV[3];     // 28    // should be MAX_POLY_PTS !!
-
-#pragma pack()
 } P_POLY;
 
 typedef struct {
-#pragma pack(1)
-
    void (*Set_Parameters)( void *, ... );
    void (*Transform)( MATRIX2 );
 
@@ -50,8 +40,6 @@ typedef struct {
    RENDERING_FUNCTION (*Deal_With_Poly3)( );
 
    void (*Emit_Poly)( );  // replace Render.Emit_Poly() if not NULL.
-
-#pragma pack()
 } SHADER_METHODS;
 
 

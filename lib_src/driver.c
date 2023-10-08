@@ -518,7 +518,7 @@ EXTERN MEM_IMAGE Driver_Call( _G_DRIVER_ *Driver, ... )
 
          case DRV_DONT_USE:
             {
-              int Mask = ~va_arg( Arg_List, REFRESH_MTHD );
+              int Mask = ~va_arg( Arg_List, int );
               Args.Refresh_Method = (REFRESH_MTHD)(Args.Refresh_Method&Mask);
               if ( Args.Refresh_Method == _VOID_ )
               {

@@ -34,41 +34,29 @@ typedef struct BSP_TREE BSP_TREE;
 
 struct BSP_NODE
 {
-#pragma pack(1)
-
    USHORT Flags;
    USHORT Up;       // 1
    USHORT Right;          // Left is always = 1
    USHORT ID;       // 2
    VECTOR Mins,  Maxs;
    PLANE Plane;     // 12
-
-#pragma pack()
 };
 
 struct BSP_LEAF
 {
-#pragma pack(1)
-
    UINT Next;
    UINT Obj_ID;
    UINT Poly1, Poly2; 
-
-#pragma pack()
 };
 
 /******************************************************************/
 
 struct BSP_TREE
 {
-#pragma pack(1)
-
    BSP_NODE *Nodes;
    INT Nb_Nodes, Max_Nodes;
    BSP_LEAF *Leaves;
    UINT Free_Leaves, Max_Leaves;
-
-#pragma pack()
 };
 
 /******************************************************************/

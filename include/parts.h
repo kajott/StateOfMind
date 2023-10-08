@@ -9,8 +9,6 @@
 /******************************************************************/
 
 struct PARTICLE {
-#pragma pack(1)
-
    OBJECT_FIELDS
 
    VECTOR     *P;   // pos
@@ -19,7 +17,6 @@ struct PARTICLE {
 
    SHADER_METHODS *Shader;
    SPLINE_3DS *Pos_k, *Rot_k, *Scale_k, *Morph_k, *Hide_k;
-#pragma pack()
 };
 
 extern INT New_Particles( OBJ_NODE *Node, INT Nb );

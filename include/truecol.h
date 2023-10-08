@@ -20,16 +20,12 @@
 
 typedef struct 
 {
-#pragma pack(1)
-
    INT Width, Height;
    INT Size;
    UINT Format;
    void *Bits;
    INT Nb_Col;
    UINT *Pal;
-
-#pragma pack()
 } BITMAP_16;
 
 extern BITMAP_16 *Load_16b( char *Name );

@@ -67,8 +67,6 @@ typedef enum {
 #define _ALL_DDRAW_METHODS_ (_FULL_SCREEN_|_DIRECT_X_)
 
 typedef struct {
-#pragma pack(1)
-
    UINT Detect, Print, Convert;
    REFRESH_MTHD  Refresh_Method;
    void *Video_Card;
@@ -77,8 +75,6 @@ typedef struct {
    STRING Window_Name;
    STRING Display_Name;
    UINT Direct, Force_Convert;
-
-#pragma pack()
 } DRIVER_ARG;
 
 /********************************************************/
@@ -117,14 +113,10 @@ typedef enum {
 } MODIFIER_TYPE;
 
 struct DRV_EVENT {
-#pragma pack(1)
-
    EVENT_TYPE  Event;
    BYTE  Key;
    MODIFIER_TYPE  Modifier;
    INT   x, y;
-
-#pragma pack()
 };
 
 /********************************************************/
@@ -147,18 +139,12 @@ typedef struct _G_DRIVER_ _G_DRIVER_;
 typedef struct MEM_ZONE_DRIVER MEM_ZONE_DRIVER;
 
 struct MEM_ZONE_DRIVER {
-#pragma pack(1)
-
    MEM_ZONE_DRIVER_FIELDS
-
-#pragma pack()
 };
 
 /********************************************************/
 
 struct _G_DRIVER_ {
-#pragma pack(1)
-
    MEM_ZONE_DRIVER *(*Change_Mode)( MEM_ZONE_DRIVER * );
    EVENT_TYPE (*Get_Event)( MEM_ZONE_DRIVER * );
    MEM_ZONE_DRIVER *(*Setup)( _G_DRIVER_ *, void *);
@@ -166,8 +152,6 @@ struct _G_DRIVER_ {
    INT (*Adapt)( MEM_ZONE_DRIVER *, void *);
    MEM_ZONE *(*Open)( MEM_ZONE_DRIVER *, INT );
    INT (*Change_Colors)( MEM_ZONE_DRIVER *, INT, COLOR_ENTRY *CMap );
-
-#pragma pack()
 };
 
 /********************************************************/ 

@@ -27,16 +27,12 @@
 #include "demo.h"
 
 typedef struct {
-#pragma pack(1)
-
    FLT z;
    FLT t, dt;
    FLT r, dr;
    FLT x, y, s;
    SPRITE *Sp;
 //   FLT T;
-
-#pragma pack()
 } PTCL;
 
 static PTCL *Ptcl =  NULL;

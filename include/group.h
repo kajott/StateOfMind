@@ -9,24 +9,16 @@
 /******************************************************************/
 
 struct GROUP {
-#pragma pack(1)
-
    OBJECT_FIELDS
 
    SPLINE_3DS *Pos_k, *Rot_k, *Scale_k, *Hide_k;
-
-#pragma pack()
 };
 
 struct OBJ_DUMMY {
-#pragma pack(1)
-
    OBJECT_FIELDS
 
    SPLINE_3DS *Pos_k, *Rot_k, *Scale_k, *FOV_k;
    SPLINE_3DS *Roll_k, *Morph_k, *Hide_k;
-
-#pragma pack()
 };
 
 extern NODE_METHODS _GROUP_;

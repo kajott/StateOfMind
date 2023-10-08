@@ -10,23 +10,15 @@
 /******************************************************************/
 
 typedef struct {
-#pragma pack(1)
-
    QUATERNION Q;   
    VECTOR P;
    FLT t;
-
-#pragma pack()
 } MOVE_KEY;
 
 typedef struct {
-#pragma pack(1)
-
    DATA_ARRAY Keys;
    INT Cache;
    INT Last_Pt;
-
-#pragma pack()
 } MOVE_SPLINE;
 
 extern void Add_Point( VECTOR P, QUATERNION Q, FLT t, MOVE_SPLINE *Spl );

@@ -22,30 +22,20 @@ typedef struct COLOR_CMAP COLOR_CMAP;
 typedef struct _CM_DUMMY_ _CM_DUMMY_;
 
 typedef union {
-#pragma pack(1)
-
   RGB_MASK *Mask;
   COLOR_INDEXER *Indexer;
   COLOR_DITHERER *Ditherer;
   COLOR_CMAP *Matcher;
   _CM_DUMMY_ *Dummy;
-
-#pragma pack()
 } SKL_CMAPPER;
 
 struct _CM_DUMMY_ { // Common fields... Beware of casts and union access...
-#pragma pack(1)
-
    SKL_CMAPPER_TYPE Type;
    void (*Col_Convert)( SKL_CMAPPER *, PIXEL *, PIXEL *, INT );
    UINT Stamp;
-
-#pragma pack()
 };
 
 struct RGB_MASK {
-#pragma pack(1)
-
    SKL_CMAPPER_TYPE Type;
    void (*Col_Convert)( SKL_CMAPPER *, PIXEL *, PIXEL *, INT );
    UINT Stamp;
@@ -53,46 +43,32 @@ struct RGB_MASK {
    UINT Masks[ 256*4 ];
    FORMAT In, Out;
    UINT Users;
-
-#pragma pack()
 };
 
 struct COLOR_INDEXER {
-#pragma pack(1)
-
    SKL_CMAPPER_TYPE Type;
    void (*Col_Convert)( SKL_CMAPPER *, PIXEL *, PIXEL *, INT );
    UINT Stamp;
    COLOR_ENTRY Orig_Cols[ 256 ];
    COLOR_ENTRY Fmt_Cols[ 256 ];
    FORMAT Out;
-
-#pragma pack()
 };
 
 struct COLOR_DITHERER {
-#pragma pack(1)
-
    SKL_CMAPPER_TYPE Type;
    void (*Col_Convert)( SKL_CMAPPER *, PIXEL *, PIXEL *, INT );
    UINT Stamp;
    COLOR_ENTRY Match[ 256 ];  /* <= must be same offset than Cols in COLOR_CMAP */
    COLOR_ENTRY Cols[ 256 ];
    UINT *Dst_Stamp;
-
-#pragma pack()
 };
 
 struct COLOR_CMAP {
-#pragma pack(1)
-
    SKL_CMAPPER_TYPE Type;
    void (*Col_Convert)( SKL_CMAPPER *, PIXEL *, PIXEL *, INT );
    UINT Stamp;
    COLOR_ENTRY Cols[ 256 ];
    UINT *Dst_Stamp;
-
-#pragma pack()
 };
 
 /********************************************************/

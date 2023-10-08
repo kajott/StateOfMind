@@ -11,16 +11,12 @@
 #include "btm.h"
 
 typedef struct {
-#pragma pack(1)
-
    MEM_ZONE_FIELDS
 
    INT Pak_Size;
    INT *H_Index;
    INT Nb_Col;
    COLOR_ENTRY *CMap;
-
-#pragma pack()
 } MEM_PAK;
 
 extern MEM_PAK *Btm_To_Pak( BITMAP *Btm, INT Alpha );

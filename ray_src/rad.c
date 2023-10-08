@@ -14,8 +14,6 @@
 #define MAX_NEAREST_COUNT 10
 
 typedef struct {
-#pragma pack(1)
-
    INT    Wghts_Count;
    INT    Good_Count;
    VECTOR Pt, N;
@@ -25,8 +23,6 @@ typedef struct {
    FLT    Wght[MAX_NEAREST_COUNT];
    FLT    Distance[MAX_NEAREST_COUNT];
    INT    Close_Count;
-
-#pragma pack()
 } RAD_WGHT;
 
 static RAD_INFO Rad_Info;

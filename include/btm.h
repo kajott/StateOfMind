@@ -13,25 +13,17 @@
 typedef struct BITMAP BITMAP;
 struct BITMAP
 {
-#pragma pack(1)
-
    INT Width, Height, Size;
    PIXEL *Bits;
 
    PIXEL *Pal;
    int Nb_Col;
-
-#pragma pack()
 };
 
    // Abstract type for BITMAP I/O...
 
 typedef struct {
-#pragma pack(1)
-
    INT Width, Height, Nb_Col;
-
-#pragma pack()
 } BITMAP_IO;
 
 /*******************************************************************/

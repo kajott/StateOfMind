@@ -28,8 +28,6 @@ extern BYTE *LZW_Bytes_Ptr;
 typedef struct LZW_STREAM LZW_STREAM;
 struct LZW_STREAM
 {
-#pragma pack(1)
-
    INT     LZW_Curr_Size;
    INT     LZW_Nb_Avail_Bytes;
    INT     LZW_Nb_Bits_Left;
@@ -41,8 +39,6 @@ struct LZW_STREAM
    BYTE   *D_Stack;
    BYTE   *Suffix;
    USHORT *Prefix;
-
-#pragma pack()
 };
 
 

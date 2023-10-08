@@ -16,8 +16,6 @@
 #define MAX_CENTERS  8
 struct BLOB 
 {
-#pragma pack(1)
-
    INT    Nb_Centers;
    MESH  *Components[MAX_CENTERS];  /* Original components */
    MESH  *Blob;                     /* New one */
@@ -35,8 +33,6 @@ struct BLOB
    FLT    Ai[MAX_CENTERS], Ci[MAX_CENTERS];
    VECTOR Bi[MAX_CENTERS];
 #endif
-
-#pragma pack()
 };
 
 /******************************************************************/

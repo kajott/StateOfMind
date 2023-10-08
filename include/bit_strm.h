@@ -14,8 +14,6 @@
 
 typedef struct BIT_STRM BIT_STRM;
 typedef struct {
-#pragma pack(1)
-
    INT    (*Init)( BIT_STRM * );
    INT    (*Select)( BIT_STRM * );
    INT    (*Un_Select)( BIT_STRM * );
@@ -28,12 +26,9 @@ typedef struct {
    INT    (*Decode_I)( );
    INT    (*Decode_II)( );
    INT    (*Close)( BIT_STRM * );
-
-#pragma pack()
 } BSTRM_MTHDS;
 
 struct BIT_STRM {
-#pragma pack(1)
    INT   Bit_Pos;
    BYTE *Raw_Ptr, *Raw;
    UINT  Buf32;
@@ -46,8 +41,6 @@ struct BIT_STRM {
    FILE *File;
    INT   File_Len;
    BSTRM_MTHDS Mthds;
-
-#pragma pack()
 };
 
 /*******************************************************/

@@ -9,8 +9,6 @@
 /******************************************************************/
 
 struct NODE_METHODS {
-#pragma pack(1)
-
    INT     Data_Size;
    void    (*Init)( OBJECT *Obj );
    INT     (*Finish)( OBJ_NODE * );
@@ -25,8 +23,6 @@ struct NODE_METHODS {
    void    (*Get_Normal)( RAY *Ray, OBJ_NODE *Node, VECTOR Normal );
    void    (*Get_Materials)( RAY *Ray, OBJ_NODE *Node );
    INT     (*Init_Ray_Constants)( OBJ_NODE *Node );
-
-#pragma pack()
 };
 
       // Shortcuts
@@ -44,8 +40,6 @@ struct NODE_METHODS {
 
 
 struct OBJ_NODE {
-#pragma pack(1)
-
    OBJ_TYPE Type;
    OBJ_NODE *Prev, *Next;
    OBJ_NODE *Parent, *Child;
@@ -64,7 +58,6 @@ struct OBJ_NODE {
    FLT  Cur_Time;
    OBJECT *Data;
    STRING Name;
-#pragma pack()
 };
 
 #define STORE_TRANSFORM_MATRIX(Node)      \

@@ -17,14 +17,10 @@ extern void (*MP3_Handle_Signal)( INT Len, const FLT *Left, const FLT *Right );
 /******************************************************************/
 
 typedef struct {
-#pragma pack(1)
-
    INT Freq, Bits_Per_Sample;
    INT In_Channels, Out_Channels;
    INT Bit_Rate, FS, Mean_Freq_Size;
    INT Cur_Frame;
-
-#pragma pack()
 } MP3_STRM;          // <= must _always_ be used as pointer.
                      // don't allocate it yourself!
                      // use MP3_Open_File() instead.
@@ -62,15 +58,11 @@ extern FLT MP3_Change_Rate;
    // in msamples.c        (old)
 
 typedef struct {
-#pragma pack(1)
-
    INT Frame_Offset;
    INT Len;
    INT Final_Len;
    SHORT Nb_Frames;
    SHORT Slot;
-
-#pragma pack()
 } MP3_SAMPLE;
 
 #define MP3_MAX_SAMPLES  16       // max samples

@@ -18,22 +18,18 @@
 
 typedef struct 
 {
-#pragma pack(1)
    INT Uo, Vo;
    INT dU, dV;
    FLT Scale;
    FLT Alpha;
-#pragma pack()
 } FLARE_SPRITE;
 
 typedef struct {
-#pragma pack(1)
    void *Bits;
    PIXEL *Convert;
    INT Width, Height, BpS;
    INT Nb_Sprites;
    FLARE_SPRITE *Sprites;
-#pragma pack()
 } FLARE;
 
 #if 0
@@ -80,9 +76,8 @@ extern void Paste_Flare_Asm_16_Sat( );
 #define LIGHT_SPOT         3
 
 struct LIGHT {
-#pragma pack(1)
-
    OBJECT_FIELDS
+
    INT    Light_Type;
    VECTOR Dir, Pos, Target;          /* Original values */
    FLT    Offset, Amplitude;
@@ -114,7 +109,6 @@ struct LIGHT {
    SPLINE_3DS *Hide_k;
 
    void *Light_Map;
-#pragma pack()
 };
 
 extern NODE_METHODS _LIGHT_, _LIGHT_WITH_RENDER_;

@@ -12,15 +12,11 @@
 /*****************************************************/
 
 typedef struct {
-#pragma pack(1)
-
    SHORT Timer, Start, Size, Speed; 
    COLOR_ENTRY Pal[256];
    COLOR_ENTRY Dst_Pal[256];
    SHORT Col_Fix8[256*3*2];
    void *Drv;
-
-#pragma pack()
 } COLOR_FADER;
 
 extern COLOR_FADER *Drv_Setup_Fader(

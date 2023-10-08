@@ -45,8 +45,6 @@ extern FLT MC_OFF_END_X, MC_OFF_END_Y, MC_OFF_END_Z;
 #define MAX_ISO_MESH 4
 struct MC_BLOB 
 {
-#pragma pack(1)
-
    INT    Nb_Centers;
    MESH  *Blob;               // final mesh
 
@@ -66,8 +64,6 @@ struct MC_BLOB
    USHORT *Prox[MAX_ISO_MESH];
    FLT     Blend0, Blend1;
    FLT     Tension;
-
-#pragma pack()
 };
 
 /******************************************************************/

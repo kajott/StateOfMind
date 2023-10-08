@@ -69,8 +69,6 @@ typedef VECTOR PATCH[16];
 /******************************************************************/
 
 typedef struct {
-#pragma pack(1)
-
    OBJ_TYPE Type;
    union {
       VECTOR Rot; /* (Rx, Ry, Rz)   or   (Theta,Phi,Omega) */
@@ -79,8 +77,6 @@ typedef struct {
    VECTOR Scale;
    VECTOR Pos;
    VECTOR Pivot;
-
-#pragma pack()
 } TRANSFORM;
 
 /******************************************************************/

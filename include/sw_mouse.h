@@ -9,12 +9,8 @@
 #include "sw_main.h"
 
 typedef struct {
-#pragma pack(1)
-
    MEM_ZONE *Zone;   
    INT X, Y, Last_X, Last_Y;
-
-#pragma pack()
 } SW_INTERFACE;
 
 /********************************************************************/

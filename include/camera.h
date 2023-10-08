@@ -16,8 +16,6 @@
 #define CAM_SPHERICAL      2
 
 struct CAMERA {
-#pragma pack(1)
-
    OBJECT_FIELDS
 
    INT       Cam_Type;
@@ -36,8 +34,6 @@ struct CAMERA {
    SPLINE_3DS *Pos_k, *FOV_k, *Roll_k, *Target_k;
 
    VISTA *Vista;
-
-#pragma pack()
 };
 
 /******************************************************************/

@@ -52,7 +52,6 @@
 
 struct POLY {
 #pragma pack(1)
-
    USHORT ID;        // 0
    USHORT Flags;     // 2
    USHORT Colors;    // 4        // Texture number for poly, or flat Color over 16bits
@@ -71,7 +70,6 @@ struct POLY {
 
 struct MSH_EDGE {
 #pragma pack(1)
-
    USHORT Start, End;      // 4 bytes
    USHORT Pt_P1, Pt_P2;    // 8
    USHORT Poly1, Poly2;    // 12
@@ -81,8 +79,6 @@ struct MSH_EDGE {
 };
 
 struct MESH {
-#pragma pack(1)
-
    OBJECT_FIELDS
 
    VECTOR     *Vertex;
@@ -109,7 +105,6 @@ struct MESH {
    VECTOR *dVw;
    VECTOR *dw;
    FLT    *Area;
-#pragma pack()
 };
 
 #define MESH_DO_MORPH             0x0001

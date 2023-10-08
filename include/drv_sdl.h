@@ -28,8 +28,6 @@
 extern int FullScreen;
 
 typedef struct {
-#pragma pack(1)
-
    MEM_ZONE_DRIVER_FIELDS
 
    /* generic */
@@ -48,8 +46,6 @@ typedef struct {
    INT           Loc_uSize;
    FLT           VP_Width;
    FLT           VP_Height;
-
-#pragma pack()
 } MEM_ZONE_SDL;
 
 extern _G_DRIVER_ __G_SDL_DRIVER_;

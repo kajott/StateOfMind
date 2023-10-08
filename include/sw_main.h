@@ -106,39 +106,29 @@ typedef struct SW_WIDGET SW_WIDGET;
 typedef struct SW_TOGGLE SW_TOGGLE;
 
 typedef struct {
-#pragma pack(1)
-
    UINT    Type;
    BITMAP *Icon;
    UINT    Size1, Size2;
    UINT    Shadow, Alpha;
-
-#pragma pack()
 } SW_BORDER;
 
 typedef struct {
-#pragma pack(1)
-
    UINT        Draw_Type;
    PIXEL       Background;
    PIXEL       Outline;
    BITMAP     *Tile;
    SW_BORDER  *Border;
-
-#pragma pack()
 } SW_ASPECT;
 
 /*************************************************************/
 
 typedef struct {
-#pragma pack(1)
    UINT    Offset;
    UINT    Height;
    INT     Widths[ SW_MAX_CHAR ];
    PIXEL  *Bits[ SW_MAX_CHAR ];
    BITMAP *Bitmap;
    PIXEL   Col_Convert[ 16 ];    /* 16 colors at max for font */
-#pragma pack()
 } SW_FONT;
 
 /************************ Methods ****************************/
@@ -152,7 +142,6 @@ typedef void (*SW_TOP_METHOD)( SW_TOP * );
 typedef UINT (*SW_REALIZE_METHOD)( SW_WIDGET * );
 
 typedef struct {
-#pragma pack(1)
    SW_MOUSE_METHOD     Click_Method;
    SW_MOUSE_METHOD     Release_Method;
    SW_MOUSE_METHOD     Drag_Method;
@@ -164,7 +153,6 @@ typedef struct {
    SW_WIDGET_METHOD    Destroy_Method;
    SW_WIDGET_METHOD    Copy_Method;
    SW_MOUSE_METHOD     Action;
-#pragma pack()
 } SW_METHODS;
 
 #if 0
@@ -215,15 +203,12 @@ typedef struct {
 /* Struct for casts */
 
 struct SW_WIDGET {
-#pragma pack(1)
    SW_WIDGET_FIELDS
-#pragma pack()
 };
 
 /******************** Inheritances *************************/
 
 struct SW_TOP {
-#pragma pack(1)
    SW_WIDGET_FIELDS
 
    SW_WIDGET *Widgets;    /* Always first. Same as in SW_GROUP */
@@ -249,12 +234,10 @@ struct SW_TOP {
    SW_WIDGET *Pop_Up_Widgets[ SW_MAX_POP_UP ];
 
    UINT       Exit_Loop_Upon_Request;
-#pragma pack()
 };
 
 
 typedef struct {
-#pragma pack(1)
    SW_WIDGET_FIELDS
 
    PIXEL   Text_Color;   /* Always first... */
@@ -263,43 +246,35 @@ typedef struct {
    STRING  Label;
    BITMAP *Icon;
    SW_MOUSE_METHOD Action;
-#pragma pack()
 } SW_BUTTON;
 
 typedef struct {
-#pragma pack(1)
    SW_WIDGET_FIELDS
 
    UINT   Backup;
    VOID  *Data;
-#pragma pack()
 } SW_GRAPHIC;
 
 
 typedef struct {
-#pragma pack(1)
    SW_WIDGET_FIELDS
 
    SW_WIDGET *Child;    /* Always first */
    SW_WIDGET *Cache;   /* For events */
    SW_WIDGET *Object_Of_Concern;
    UINT       Backup;
-#pragma pack()
 } SW_GROUP;
 
 
 typedef struct {
-#pragma pack(1)
    SW_WIDGET_FIELDS
 
    PIXEL Text_Color;
    UINT Row;
    UINT Line_Height;
-#pragma pack()
 } SW_MESSAGE;
 
 struct SW_TOGGLE {
-#pragma pack(1)
    SW_WIDGET_FIELDS
 
    PIXEL      Text_Color;
@@ -309,11 +284,9 @@ struct SW_TOGGLE {
    BITMAP    *Icon1, *Icon2;
    VOID      *Data;
    VOID     (*Warn)( SW_TOGGLE *, VOID * );
-#pragma pack()
 };
 
 typedef struct {
-#pragma pack(1)
    SW_WIDGET_FIELDS
 
    PIXEL   Text_Color, Old_Background;
@@ -327,13 +300,11 @@ typedef struct {
 
    void  *(*Get_Value)( SW_WIDGET *);
    void   (*Data_Changed)( SW_WIDGET *, void *, STRING );
-#pragma pack()
 } SW_DATA;
 
 #if 0
 
 typedef struct {
-#pragma pack(1)
    SW_WIDGET_FIELDS
 
    PIXEL      Text_Color;
@@ -347,7 +318,6 @@ typedef struct {
    VOID      *Additional_Data;
    VOID     (*Data_Changed)( SW_WIDGET *, VOID * );
    STRING    *Strings;
-#pragma pack()
 } SW_SLIDER;
 
 #endif

@@ -20,8 +20,6 @@ typedef enum {
 } MAP_TYPE;
 
 struct TEXTURE_MAP {
-#pragma pack(1)
-
    MAP_TYPE Type;
    SHORT Users;
    SHORT Quantum;
@@ -29,13 +27,9 @@ struct TEXTURE_MAP {
    PIXEL Base;
    USHORT Offset;
    PIXEL *Ptr;       /* 64k aligned ? */
-
-#pragma pack()
 };
 
 struct MATERIAL {
-#pragma pack(1)
-
    OBJECT_FIELDS
 
    SHADER_METHODS *Shader;
@@ -44,13 +38,9 @@ struct MATERIAL {
    INT Map_Nb1, Map_Nb2, Map_Nb3;
    INT Mapped;
    FCOLOR Ambient, Diffuse, Specular;
-
-#pragma pack()
 };
 
 struct TXT_CACHE {
-#pragma pack(1)
-
    PIXEL *Texture_Maps_Real_Ptr;
    PIXEL *Texture_Maps_Ptr;
    INT Nb_Texture_Maps;
@@ -58,8 +48,6 @@ struct TXT_CACHE {
    TEXTURE_MAP *Maps;
    PIXEL *CMap;
    INT Nb_Col, Nb_Offset;
-
-#pragma pack()
 };
 
 #define TEXTURE_MAP_SIZE     (256*256)
@@ -77,8 +65,6 @@ extern INT Finish_Material_Data( OBJECT *Mat );
 /******************************************************************/
 
 struct CACHE_METHODS {
-#pragma pack(1)
-
    void   (*Clear_Cache)( void *Cache );
    void   (*Setup_Material)( void *Cache, OBJECT *Mat );
    INT    (*Retreive_Texture)( INT Mip_Slot, FLT R );
@@ -88,8 +74,6 @@ struct CACHE_METHODS {
    void   (*Init_From_Poly_II)( );
    void   (*Init_From_Poly_III)( );
    USHORT (*Poly_Flat_Color)( );
-
-#pragma pack()
 };
 
 extern CACHE_METHODS Cache_Methods_I;
@@ -149,20 +133,14 @@ typedef struct MIP_BLOCK MIP_BLOCK;
 typedef struct MIP_ROW MIP_ROW;
 
 struct MIP_ROW {
-#pragma pack(1)
-
    MIP_ROW *Next;
    USHORT *Ptr;
    MIP_BLOCK *Slots;
    INT Nb_Entries;
    INT Max_Entries;
-
-#pragma pack()
 };
 
 struct MIP_BLOCK { 
-#pragma pack(1)
-
    MIP_BLOCK *Next; 
    BYTE Mip_Level;
    BYTE Installed;   
@@ -171,22 +149,14 @@ struct MIP_BLOCK {
    USHORT *Bits;
    MIP_ROW *Mip_Row;
    INT Row_Entry;
-
-#pragma pack()
 };
 
 typedef struct {
-#pragma pack(1)
-
    MIP_BLOCK *Mips[MIP_MAX];
    INT Max_Mip;
-
-#pragma pack()
 } POLY_MIPS;
 
 typedef struct {
-#pragma pack(1)
-
    INT Nb_Mips;
    MIP_BLOCK *Mips[MIP_MAX];
 
@@ -196,8 +166,6 @@ typedef struct {
 
    MIP_ROW *Mip_Rows[MIP_MAX];
    INT Nb_Rows, Size;
-
-#pragma pack()
 } TXT_CACHE_III;
 
 

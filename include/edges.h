@@ -12,26 +12,18 @@ typedef struct EDGE2D EDGE2D;
 typedef struct SPAN SPAN;
 
 struct EDGE2D {
-#pragma pack(1)
-
    INT      x, dx;
    INT      Is_Left;
    SURFACE *Surface;
    EDGE2D  *Next, *Prev;
    EDGE2D  *Remove;
-
-#pragma pack()
 };
 
 
 struct SPAN {
-#pragma pack(1)
-
     INT      x, y, Count;
     INT      Dst;
     SURFACE *Surf;
-
-#pragma pack()
 };
 
 #define MAX_EDGES_2D   5000

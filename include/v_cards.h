@@ -11,8 +11,6 @@
 
 typedef struct CARD_METHODS CARD_METHODS;
 struct CARD_METHODS {
-#pragma pack(1)
-
    STRING Name;
    REFRESH_MTHD	Refresh;
    INT (*Detect)( VBE_INFO * );
@@ -20,7 +18,6 @@ struct CARD_METHODS {
    MEM_ZONE_DRIVER *(*Init_VGA)( MEM_ZONE_DRIVER * );
    MEM_ZONE_DRIVER *(*Init_LFB)( MEM_ZONE_DRIVER * );
    MEM_ZONE_DRIVER *(*Init_BNK_SW)( MEM_ZONE_DRIVER * );
-#pragma pack()
 };
 
 /********************************************************/

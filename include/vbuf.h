@@ -16,8 +16,6 @@ typedef enum { VEMPTY, V565, V777, V888, VCMAP, VSCR } VBUFFER_TYPE;
 
 typedef struct 
 {
-#pragma pack(1)
-
    VBUFFER_TYPE Type;
    INT W, H, BpS, Size;
    USHORT Flags;
@@ -26,8 +24,6 @@ typedef struct
    INT Nb_Col;
    void *CMap;
    INT Xo, Yo;
-
-#pragma pack()
 } VBUFFER;
 
 /********************************************************************/

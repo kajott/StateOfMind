@@ -81,8 +81,6 @@ typedef struct RENDERER RENDERER;
 
 struct RENDERER
 {
-#pragma pack(1)
-
    INT Quantum;
    void  (*Init_All)( RENDERER *R, INT Check_Buf );
    void *(*Setup)( RENDERER *R, INT Check_Buf );
@@ -109,7 +107,6 @@ struct RENDERER
    CACHE_METHODS     *Cache_Methods;
 
    INT Size_X, Size_Y, BpS;
-#pragma pack()
 };
 
 

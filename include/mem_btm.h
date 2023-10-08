@@ -28,8 +28,6 @@
 typedef struct MEM_BITMAP MEM_BITMAP;
 struct MEM_BITMAP
 {
-#pragma pack(1)
-
    MEM_ZONE_FIELDS
 
    PIXEL *Bits;
@@ -45,21 +43,15 @@ struct MEM_BITMAP
 
    INT Transparent;
    float Alpha; 
-
-#pragma pack()
 };
 
    /* Abstract type for MEM_BITMAP I/O... */
 
 typedef struct {
-#pragma pack(1)
-
    INT Type;
    INT Width, Height;
    INT Pixel_Depth, CMap_Depth;
    int Nb_Col, Nb_Blur_Col, Nb_Sat_Col;
-
-#pragma pack()
 } MEM_BITMAP_IO;
 
 /*******************************************************************/

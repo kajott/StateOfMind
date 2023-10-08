@@ -13,14 +13,10 @@
 #define BOX_EPSILON  0.01f
 
 struct BBOX {
-#pragma pack(1)
-
    VECTOR Mins,  Maxs;   // original
    VECTOR TMins, TMaxs;  // transformed
    FLT    Radius, TRadius;
    FLT    iZ, TiZ;
-
-#pragma pack()
 };
 
 /******************************************************************/
