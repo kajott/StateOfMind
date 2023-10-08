@@ -343,6 +343,8 @@ target_compile_definitions (mind PRIVATE UNIX)
 if (NOT WIN32)
     find_package (Threads REQUIRED)
     target_link_libraries (mind PUBLIC Threads::Threads m)
+else ()
+    set_target_properties(mind PROPERTIES WIN32_EXECUTABLE $<CONFIG:Release>)
 endif ()
 
 # make the binary appear in the project's root directory
