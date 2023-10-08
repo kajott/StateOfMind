@@ -495,7 +495,7 @@ EXTERN MEM_IMAGE Driver_Call( _G_DRIVER_ *Driver, ... )
 
    while( 1 )
    {
-      Arg = va_arg( Arg_List, VAR_ARG_TYPE );
+      Arg = (VAR_ARG_TYPE) va_arg( Arg_List, int );
       switch( Arg )
       {
          case DRV_END_ARG: goto End_Parsing; 

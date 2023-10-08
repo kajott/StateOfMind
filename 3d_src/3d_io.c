@@ -332,7 +332,7 @@ static INT Smooth_List_Rd( FILE *F, UINT Size )
 static INT Tr_Matrix_Rd( FILE *F, UINT Size )
 {
    VECTOR Pivot;
-   FLT M[9];
+   MATRIX M;  // originally FLT M[9], but GCC doesn't trust us that we really only need the first 9 elements here
    QUATERNION Q;
    INT i;
 

@@ -82,7 +82,7 @@ EXTERN RENDERER *Install_Renderer( RENDERER *What, ... )
    va_start( Arg_List, What );
    while( 1 )
    {
-      Option = va_arg( Arg_List, RENDERER_OPTION );
+      Option = (RENDERER_OPTION) va_arg( Arg_List, int);
       if ( Option == RENDER_END_ARG ) break;
       else switch( Option )
       {
